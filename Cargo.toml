@@ -3,4 +3,8 @@ name = "frostbow"
 version = "0.0.1"
 edition = "2021"
 
+description = "Package to use Apache Datafusion with Apache Iceberg"
+
+license = "Apache-2.0"
+
 [dependencies]
