@@ -8,7 +8,6 @@ use datafusion_cli::{
     print_options::{MaxRows, PrintOptions},
 };
 use datafusion_iceberg::error::Error;
-use rustyline::{error::ReadlineError, DefaultEditor};
 
 #[derive(Debug, Parser)]
 #[clap(version, about)]
@@ -26,7 +25,7 @@ async fn main() -> ExitCode {
 async fn main_inner() -> Result<(), Error> {
     let _args = Args::parse();
 
-    let print_options = PrintOptions {
+    let mut print_options = PrintOptions {
         format: PrintFormat::Automatic,
         quiet: true,
         maxrows: MaxRows::Unlimited,
@@ -35,21 +34,9 @@ async fn main_inner() -> Result<(), Error> {
 
     let mut ctx = SessionContext::new();
 
-    let mut rl = DefaultEditor::new().unwrap();
-
-    loop {
-        let readline = rl.readline(">> ");
-
-        match readline {
-            Ok(line) => {
-                exec::exec_from_commands(&mut ctx, vec![line], &print_options).await?;
-            }
-            Err(ReadlineError::Interrupted) => break,
-            Err(err) => {
-                println!("{:?}", err)
-            }
-        }
-    }
+    exec::exec_from_repl(&mut ctx, &mut print_options)
+        .await
+        .unwrap();
 
     Ok(())
 }
