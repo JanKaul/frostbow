@@ -1,3 +1,12 @@
 #V2
 SELECT * FROM information_schema.schemata;
 \\q
+CREATE EXTERNAL TABLE iceberg.public.orders (\n      id BIGINT NOT NULL,\n      order_date DATE NOT NULL,\n      customer_id INTEGER NOT NULL,\n      product_id INTEGER NOT NULL,\n      quantity INTEGER NOT NULL\n)\nSTORED AS ICEBERG\nLOCATION '/path/to/'\nOPTIONS ('has_header' 'true');
+\\q
+CREATE EXTERNAL TABLE iceberg.public.orders (\n      id BIGINT NOT NULL,\n      order_date DATE NOT NULL,\n      customer_id INTEGER NOT NULL,\n      product_id INTEGER NOT NULL,\n      quantity INTEGER NOT NULL\n)\nSTORED AS ICEBERG\nLOCATION '/path/to/';
+INSERT INTO iceberg.public.orders (id, customer_id, product_id, order_date, quantity) VALUES \n                (1, 1, 1, '2020-01-01', 1),\n                (2, 2, 1, '2020-01-01', 1),\n                (3, 3, 1, '2020-01-01', 3),\n                (4, 1, 2, '2020-02-02', 1),\n                (5, 1, 1, '2020-02-02', 2),\n                (6, 3, 3, '2020-02-02', 3);
+CREATE MATERIALIZED VIEW iceberg.public.quantities_by_product AS select product_id, sum(quantity) from iceberg.public.orders group by product_id;
+select * from iceberg.public.quantities_by_product;
+select refresh_materialized_view('iceberg.public.quantities_by_product');
+select * from iceberg.public.quantities_by_product;
+\\q
