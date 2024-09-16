@@ -1,4 +1,4 @@
-use std::{env, process::ExitCode, sync::Arc};
+use std::{process::ExitCode, sync::Arc};
 
 use clap::Parser;
 use datafusion::{
@@ -66,23 +66,9 @@ async fn main_inner() -> Result<(), Error> {
     let username = args.username;
     let password = args.password;
 
-    let aws_access_key_id = env::var("AWS_ACCESS_KEY_ID");
-    let aws_secret_access_key = env::var("AWS_SECRET_ACCESS_KEY");
-    let aws_endpoint = env::var("AWS_ENDPOINT").ok();
-    let aws_allow_http = env::var("AWS_ALLOW_HTTP").ok();
-
-    let object_store = match (&bucket, aws_access_key_id, aws_secret_access_key) {
-        (Some(bucket), Ok(aws_access_key_id), Ok(aws_secret_access_key)) => {
-            let mut builder = AmazonS3Builder::from_env()
-                .with_bucket_name(bucket)
-                .with_access_key_id(aws_access_key_id)
-                .with_secret_access_key(aws_secret_access_key);
-            if let Some(aws_endpoint) = aws_endpoint {
-                builder = builder.with_endpoint(aws_endpoint);
-            }
-            if let Some("TRUE") = aws_allow_http.as_deref() {
-                builder = builder.with_allow_http(true);
-            }
+    let object_store = match &bucket {
+        Some(bucket) => {
+            let builder = AmazonS3Builder::from_env().with_bucket_name(bucket);
 
             ObjectStoreBuilder::S3(builder)
         }
@@ -107,9 +93,12 @@ async fn main_inner() -> Result<(), Error> {
     #[cfg(feature = "sql")]
     let iceberg_catalog_list = {
         Arc::new(
-            SqlCatalogList::new(&catalog_url, object_store.build(Bucket::Local)?)
-                .await
-                .unwrap(),
+            SqlCatalogList::new(
+                &catalog_url,
+                object_store.build(Bucket::S3(&bucket.unwrap()))?,
+            )
+            .await
+            .unwrap(),
         )
     };
 
