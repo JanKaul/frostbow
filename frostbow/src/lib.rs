@@ -30,6 +30,8 @@ pub struct Args {
     pub username: Option<String>,
     #[clap(short = 'W', long)]
     pub password: Option<String>,
+    #[clap(short = 'c', long)]
+    pub command: Vec<String>,
 }
 
 pub struct IcebergContext(pub SessionContext);

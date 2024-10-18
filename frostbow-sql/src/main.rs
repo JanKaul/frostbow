@@ -43,6 +43,7 @@ async fn main_inner() -> Result<(), Error> {
     ))?;
 
     let bucket = args.bucket;
+    let command = args.command;
 
     let object_store = match &bucket {
         Some(bucket) => {
@@ -97,9 +98,15 @@ async fn main_inner() -> Result<(), Error> {
 
     let mut ctx = IcebergContext(ctx);
 
-    exec::exec_from_repl(&mut ctx, &mut print_options)
-        .await
-        .unwrap();
+    if command.is_empty() {
+        exec::exec_from_repl(&mut ctx, &mut print_options)
+            .await
+            .unwrap();
+    } else {
+        exec::exec_from_commands(&mut ctx, command, &mut print_options)
+            .await
+            .unwrap()
+    }
 
     Ok(())
 }
