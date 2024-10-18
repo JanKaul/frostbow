@@ -20,14 +20,10 @@ use datafusion_iceberg::{
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
 use frostbow::{Args, IcebergContext};
-use iceberg_rust::catalog::bucket::ObjectStoreBuilder;
+use iceberg_rust::catalog::bucket::{Bucket, ObjectStoreBuilder};
 use object_store::{aws::AmazonS3Builder, memory::InMemory};
 
-#[cfg(feature = "rest")]
-use iceberg_rest_catalog::{apis::configuration::Configuration, catalog::RestCatalogList};
-
-#[cfg(not(feature = "rest"))]
-compile_error!("feature \"rest\" must be enabled for cli");
+use iceberg_sql_catalog::SqlCatalogList;
 
 #[tokio::main]
 async fn main() -> ExitCode {
@@ -48,9 +44,6 @@ async fn main_inner() -> Result<(), Error> {
 
     let bucket = args.bucket;
 
-    let username = args.username;
-    let password = args.password;
-
     let object_store = match &bucket {
         Some(bucket) => {
             let builder = AmazonS3Builder::from_env().with_bucket_name(bucket);
@@ -60,19 +53,18 @@ async fn main_inner() -> Result<(), Error> {
         _ => ObjectStoreBuilder::Memory(Arc::new(InMemory::new())),
     };
 
-    #[cfg(feature = "rest")]
     let iceberg_catalog_list = {
-        let configuration = Configuration {
-            base_path: catalog_url,
-            user_agent: None,
-            client: reqwest_middleware::ClientBuilder::new(reqwest::Client::new()).build(),
-            basic_auth: username.map(|username| (username, password)),
-            oauth_access_token: None,
-            bearer_access_token: None,
-            api_key: None,
-        };
-
-        Arc::new(RestCatalogList::new(configuration, object_store))
+        Arc::new(
+            SqlCatalogList::new(
+                &catalog_url,
+                match &bucket {
+                    Some(bucket) => object_store.build(Bucket::S3(&bucket))?,
+                    None => object_store.build(Bucket::Local)?,
+                },
+            )
+            .await
+            .unwrap(),
+        )
     };
 
     let catalog_list = Arc::new(IcebergCatalogList::new(iceberg_catalog_list.clone()).await?);

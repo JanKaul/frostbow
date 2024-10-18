@@ -3,5 +3,5 @@
 resolver = "2"
 
 members = [
-    "frostbow",
+    "frostbow", "frostbow-sql",
 ]

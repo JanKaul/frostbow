@@ -1,4 +1,5 @@
 use async_trait::async_trait;
+use clap::Parser;
 use std::sync::Arc;
 
 use datafusion::{
@@ -17,6 +18,19 @@ use datafusion_cli::{
 };
 use datafusion_iceberg::planner::iceberg_transform;
 use object_store::ObjectStore;
+
+#[derive(Debug, Parser)]
+#[clap(version, about)]
+pub struct Args {
+    #[clap(short = 'u', long = "catalog-url")]
+    pub catalog_url: Option<String>,
+    #[clap(short = 'b', long)]
+    pub bucket: Option<String>,
+    #[clap(short = 'U', long)]
+    pub username: Option<String>,
+    #[clap(short = 'W', long)]
+    pub password: Option<String>,
+}
 
 pub struct IcebergContext(pub SessionContext);
 
