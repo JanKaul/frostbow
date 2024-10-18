@@ -14,7 +14,7 @@ jobs:
       - name: test build rust project
         uses: lxl66566/rust-simple-release@main
         with:
-          targets: x86_64-pc-windows-msvc, x86_64-unknown-linux-musl, x86_64-unknown-linux-gnu, x86_64-apple-darwin
+          targets: x86_64-pc-windows-msvc, x86_64-unknown-linux-gnu, x86_64-apple-darwin
           token: ${{ secrets.GITHUB_TOKEN }}
           package: frostbow
   release-sql:
@@ -27,6 +27,6 @@ jobs:
       - name: test build rust project
         uses: lxl66566/rust-simple-release@main
         with:
-          targets: x86_64-pc-windows-msvc, x86_64-unknown-linux-musl, x86_64-unknown-linux-gnu, x86_64-apple-darwin
+          targets: x86_64-pc-windows-msvc, x86_64-unknown-linux-gnu, x86_64-apple-darwin
           token: ${{ secrets.GITHUB_TOKEN }}
           package: frostbow-sql
