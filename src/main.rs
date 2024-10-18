@@ -95,7 +95,10 @@ async fn main_inner() -> Result<(), Error> {
         Arc::new(
             SqlCatalogList::new(
                 &catalog_url,
-                object_store.build(Bucket::S3(&bucket.unwrap()))?,
+                match &bucket {
+                    Some(bucket) => object_store.build(Bucket::S3(&bucket))?,
+                    None => object_store.build(Bucket::Local)?,
+                },
             )
             .await
             .unwrap(),

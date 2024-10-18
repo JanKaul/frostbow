@@ -9,15 +9,15 @@ A small wrapper around the Datafusion query engine to use Datafusion with Apache
 Create an Iceberg Table in object storage:
 
 ```sql
-CREATE EXTERNAL TABLE iceberg.public.customers (
+CREATE EXTERNAL TABLE iceberg.public.orders (
       id BIGINT NOT NULL,
-      first_name TEXT,
-      last_name TEXT,
-      email TEXT,
-      segment TEXT,
+      order_date DATE NOT NULL,
+      customer_id INTEGER NOT NULL,
+      total_price DOUBLE NOT NULL
 )
 STORED AS ICEBERG
-LOCATION 's3://iceberg/customers';
+PARTITIONED BY ( "month(order_date)" )
+LOCATION 's3://iceberg/orders';
 ```
 
 ### Insert
@@ -26,28 +26,17 @@ Insert data into an ieberg table
 
 ```sql
 
-INSERT INTO iceberg.public.customers (id, first_name, last_name, email, segment) VALUES 
-        (1, 'John', 'Doe', 'john.doe@medicare.com', 'Healthcare'),
-        (2, 'Jane', 'Smith', 'jane.smith@bankofamerica.com', 'Finance'),
-        (3, 'Michael', 'Johnson', 'michael.johnson@microsoft.com', 'Technology'),
-        (4, 'Emily', 'Williams', 'emily.williams@toyota.com', 'Manufacturing'),
-        (5, 'David', 'Brown', 'david.brown@hospitals.org', 'Healthcare'),
-        (6, 'Sarah', 'Davis', 'sarah.davis@goldmansachs.com', 'Finance'),
-        (7, 'William', 'Miller', 'william.miller@amazon.com', 'Technology'),
-        (8, 'Olivia', 'Wilson', 'olivia.wilson@ford.com', 'Manufacturing'),
-        (9, 'James', 'Anderson', 'james.anderson@pharmaceuticals.com', 'Healthcare'),
-        (10, 'Ava', 'Thomas', 'ava.thomas@americanexpress.com', 'Finance'),
-        (11, 'Robert', 'Jackson', 'robert.jackson@ibm.com', 'Technology'),
-        (12, 'Isabella', 'White', 'isabella.white@siemens.com', 'Technology'),
-        (13, 'Richard', 'Harris', 'richard.harris@healthinsurance.com', 'Healthcare'),
-        (14, 'Sophia', 'Martin', 'sophia.martin@jpmorgan.com', 'Finance'),
-        (15, 'Charles', 'Thompson', 'charles.thompson@oracle.com', 'Technology'),
-        (16, 'Mia', 'Garcia', 'mia.garcia@ge.com', 'Manufacturing'),
-        (17, 'Thomas', 'Martinez', 'thomas.martinez@hospitals.org', 'Healthcare'),
-        (18, 'Charlotte', 'Robinson', 'charlotte.robinson@google.com', 'Technology'),
-        (19, 'Ronald', 'Clark', 'ronald.clark@microsoft.com', 'Technology'),
-        (20, 'Abigail', 'Rodriguez', 'abigail.rodriguez@johnsonandjohnson.com', 'Healthcare');
-
+INSERT INTO iceberg.public.orders (id, order_date, customer_id, total_price) VALUES 
+        (1, '2022-01-01', 1, 100.00),
+        (2, '2022-01-02', 2, 200.00),
+        (3, '2022-01-03', 3, 50.00),
+        (4, '2022-01-04', 1, 150.00),
+        (5, '2022-02-05', 4, 75.00),
+        (6, '2022-02-06', 2, 250.00),
+        (7, '2022-02-07', 5, 30.00),
+        (8, '2022-02-08', 3, 120.00),
+        (9, '2022-02-09', 1, 180.00),
+        (10, '2022-03-10', 6, 60.00);
 ```
 
 ### Create Materialized View
