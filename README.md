@@ -2,6 +2,19 @@
 
 A small wrapper around the Datafusion query engine to use Datafusion with Apache Iceberg
 
+## Usage
+
+Start the Frostbow cli with a sql catalog:
+
+```bash
+frostbow-sql -u postgres://user:password@localhost:5432 -b s3://my-bucket
+```
+
+Pass object-store credentials:
+```bash
+AWS_ACCESS_KEY_ID=... AWS_SECRET_ACCESS_KEY=... frostbow-sql -u postgres://user:password@localhost:5432 -b s3://my-bucket
+```
+
 ## Commands
 
 ### Create table
