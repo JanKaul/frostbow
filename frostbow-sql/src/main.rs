@@ -21,7 +21,7 @@ use datafusion_iceberg::{
 };
 use frostbow::{Args, IcebergContext};
 use iceberg_rust::catalog::bucket::{Bucket, ObjectStoreBuilder};
-use object_store::{aws::AmazonS3Builder, memory::InMemory};
+use object_store::{aws::AmazonS3Builder, local::LocalFileSystem, memory::InMemory};
 
 use iceberg_sql_catalog::SqlCatalogList;
 
@@ -47,9 +47,13 @@ async fn main_inner() -> Result<(), Error> {
 
     let object_store = match &bucket {
         Some(bucket) => {
-            let builder = AmazonS3Builder::from_env().with_bucket_name(bucket);
+            if bucket.starts_with("s3://") {
+                let builder = AmazonS3Builder::from_env().with_bucket_name(bucket);
 
-            ObjectStoreBuilder::S3(builder)
+                ObjectStoreBuilder::S3(builder)
+            } else {
+                ObjectStoreBuilder::Filesystem(Arc::new(LocalFileSystem::new()))
+            }
         }
         _ => ObjectStoreBuilder::Memory(Arc::new(InMemory::new())),
     };
