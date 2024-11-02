@@ -1729,8 +1729,7 @@ dependencies = [
 [[package]]
 name = "datafusion_iceberg"
 version = "0.5.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba57c5f36539eef6fbe6e3f846708f4e4ce7315d384cd61616e7d46bc20040c7"
+source = "git+https://github.com/jankaul/iceberg-rust#c6c155835650d8ad68cda67423ca09f9e9176b2b"
 dependencies = [
  "async-trait",
  "chrono",
@@ -2583,8 +2582,7 @@ dependencies = [
 [[package]]
 name = "iceberg-rest-catalog"
 version = "0.5.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "668c8baaa9c7579c54b46a65db8d7626f4d9e05e9ae455ec29109b32409760f2"
+source = "git+https://github.com/jankaul/iceberg-rust#c6c155835650d8ad68cda67423ca09f9e9176b2b"
 dependencies = [
  "async-trait",
  "futures",
@@ -2605,8 +2603,7 @@ dependencies = [
 [[package]]
 name = "iceberg-rust"
 version = "0.5.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c048222686f000e68783436554c23e9bfc9c290a109059ba74a4d2c18e2f2f2f"
+source = "git+https://github.com/jankaul/iceberg-rust#c6c155835650d8ad68cda67423ca09f9e9176b2b"
 dependencies = [
  "apache-avro",
  "arrow",
@@ -2622,6 +2619,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
+ "smallvec",
  "sqlparser",
  "thiserror",
  "thrift",
@@ -2633,8 +2631,7 @@ dependencies = [
 [[package]]
 name = "iceberg-rust-spec"
 version = "0.5.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "528a54c598338f6418e1e20819f53d7b883ea280079a2c46d27bae7c9763ecb0"
+source = "git+https://github.com/jankaul/iceberg-rust#c6c155835650d8ad68cda67423ca09f9e9176b2b"
 dependencies = [
  "apache-avro",
  "arrow-schema",
@@ -2660,8 +2657,7 @@ dependencies = [
 [[package]]
 name = "iceberg-sql-catalog"
 version = "0.5.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1a112acde6ff7364335ee0a124c4e060eac5c1949c7fc11a8b56513fa4c5a156"
+source = "git+https://github.com/jankaul/iceberg-rust#c6c155835650d8ad68cda67423ca09f9e9176b2b"
 dependencies = [
  "async-trait",
  "futures",
