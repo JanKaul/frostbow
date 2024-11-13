@@ -2,11 +2,7 @@ use std::{process::ExitCode, sync::Arc};
 
 use clap::Parser;
 use datafusion::{
-    execution::{
-        config::SessionConfig,
-        context::{SessionContext, SessionState},
-        runtime_env::RuntimeEnv,
-    },
+    execution::{context::SessionContext, SessionStateBuilder},
     logical_expr::ScalarUDF,
 };
 use datafusion_cli::{
@@ -74,18 +70,11 @@ async fn main_inner() -> Result<(), Error> {
 
     let catalog_list = Arc::new(IcebergCatalogList::new(iceberg_catalog_list.clone()).await?);
 
-    let session_config = SessionConfig::from_env()?
-        .with_create_default_catalog_and_schema(true)
-        .with_information_schema(true);
-
-    let runtime_env = Arc::new(RuntimeEnv::default());
-
-    let state = SessionState::new_with_config_rt_and_catalog_list(
-        session_config,
-        runtime_env,
-        catalog_list,
-    )
-    .with_query_planner(Arc::new(IcebergQueryPlanner {}));
+    let state = SessionStateBuilder::new()
+        .with_default_features()
+        .with_catalog_list(catalog_list)
+        .with_query_planner(Arc::new(IcebergQueryPlanner {}))
+        .build();
 
     let mut print_options = PrintOptions {
         format: PrintFormat::Automatic,

@@ -33,3 +33,5 @@ select * from iceberg.public.orders;
 \\q
 CREATE EXTERNAL TABLE iceberg.public.orders (\n      id BIGINT NOT NULL,\n      order_date DATE NOT NULL,\n      customer_id INTEGER NOT NULL,\n      total_price DOUBLE NOT NULL\n)\nSTORED AS ICEBERG\nPARTITIONED BY ( "identity(customer_id) ")\nLOCATION 's3://iceberg/orders';
 \\q
+select * from information_schema.schemata;
+\\q
