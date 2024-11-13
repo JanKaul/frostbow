@@ -532,6 +532,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "aws-sdk-glue"
+version = "1.69.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0a741d4cf8386760213097345aa262ed56154a70733254e138def62b42a602e1"
+dependencies = [
+ "aws-credential-types",
+ "aws-runtime",
+ "aws-smithy-async",
+ "aws-smithy-http",
+ "aws-smithy-json",
+ "aws-smithy-runtime",
+ "aws-smithy-runtime-api",
+ "aws-smithy-types",
+ "aws-types",
+ "bytes",
+ "http 0.2.12",
+ "once_cell",
+ "regex-lite",
+ "tracing",
+]
+
+[[package]]
 name = "aws-sdk-sso"
 version = "1.49.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2135,6 +2157,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "frostbow-glue"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "aws-config",
+ "clap",
+ "datafusion",
+ "datafusion-cli",
+ "datafusion_iceberg",
+ "frostbow",
+ "iceberg-glue-catalog",
+ "iceberg-rust",
+ "object_store",
+ "openssl",
+ "tokio",
+]
+
+[[package]]
 name = "frostbow-sql"
 version = "0.1.0"
 dependencies = [
@@ -2630,6 +2670,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f31827a206f56af32e590ba56d5d2d085f558508192593743f16b2306495269f"
 dependencies = [
  "cc",
+]
+
+[[package]]
+name = "iceberg-glue-catalog"
+version = "0.5.8"
+source = "git+https://github.com/jankaul/iceberg-rust#7932b699375e8107b9657458639fd0290a7f6b9b"
+dependencies = [
+ "async-trait",
+ "aws-config",
+ "aws-sdk-glue",
+ "futures",
+ "iceberg-rust",
+ "object_store",
+ "serde_json",
+ "thiserror",
+ "url",
+ "uuid",
 ]
 
 [[package]]

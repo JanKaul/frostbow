@@ -1,0 +1,22 @@
+[package]
+name = "frostbow-glue"
+version = "0.1.0"
+edition = "2021"
+
+description = "Package to use Apache Datafusion with Apache Iceberg"
+
+license = "Apache-2.0"
+
+[dependencies]
+clap = { workspace = true }
+datafusion = { workspace = true }
+datafusion-cli = { workspace = true }
+tokio = { workspace = true }
+object_store = { workspace = true }
+iceberg-rust = { workspace = true }
+datafusion_iceberg = { workspace = true }
+iceberg-glue-catalog = { git = "https://github.com/jankaul/iceberg-rust", version = "0.5" }
+async-trait = { workspace = true }
+frostbow = { path = "../frostbow", no-default-features = true }
+openssl.workspace = true
+aws-config = "1.5.10"

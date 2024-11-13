@@ -3,7 +3,7 @@
 resolver = "2"
 
 members = [
-    "frostbow", "frostbow-sql",
+    "frostbow", "frostbow-sql", "frostbow-glue"
 ]
 
 [workspace.dependencies]
