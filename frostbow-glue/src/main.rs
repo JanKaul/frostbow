@@ -16,7 +16,8 @@ use datafusion_iceberg::{
 };
 use frostbow::{Args, IcebergContext};
 use iceberg_glue_catalog::GlueCatalog;
-use object_store::{aws::AmazonS3Builder, local::LocalFileSystem, memory::InMemory, ObjectStore};
+use iceberg_rust::catalog::bucket::ObjectStoreBuilder;
+use object_store::{aws::AmazonS3Builder, local::LocalFileSystem};
 
 #[tokio::main]
 async fn main() -> ExitCode {
@@ -33,17 +34,17 @@ async fn main_inner() -> Result<(), Error> {
     let bucket = args.bucket;
     let command = args.command;
 
-    let object_store: Arc<dyn ObjectStore> = match &bucket {
+    let object_store: ObjectStoreBuilder = match &bucket {
         Some(bucket) => {
             if bucket.starts_with("s3://") {
                 let builder = AmazonS3Builder::from_env().with_bucket_name(bucket);
 
-                Arc::new(builder.build()?)
+                ObjectStoreBuilder::S3(builder)
             } else {
-                Arc::new(LocalFileSystem::new())
+                ObjectStoreBuilder::Filesystem(Arc::new(LocalFileSystem::new()))
             }
         }
-        _ => Arc::new(InMemory::new()),
+        _ => ObjectStoreBuilder::memory(),
     };
 
     let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;

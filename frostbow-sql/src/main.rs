@@ -16,7 +16,7 @@ use datafusion_iceberg::{
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
 use frostbow::{Args, IcebergContext};
-use iceberg_rust::catalog::bucket::{Bucket, ObjectStoreBuilder};
+use iceberg_rust::catalog::bucket::ObjectStoreBuilder;
 use object_store::{aws::AmazonS3Builder, local::LocalFileSystem, memory::InMemory};
 
 use iceberg_sql_catalog::SqlCatalogList;
@@ -56,15 +56,9 @@ async fn main_inner() -> Result<(), Error> {
 
     let iceberg_catalog_list = {
         Arc::new(
-            SqlCatalogList::new(
-                &catalog_url,
-                match &bucket {
-                    Some(bucket) => object_store.build(Bucket::S3(&bucket))?,
-                    None => object_store.build(Bucket::Local)?,
-                },
-            )
-            .await
-            .unwrap(),
+            SqlCatalogList::new(&catalog_url, object_store)
+                .await
+                .unwrap(),
         )
     };
 
