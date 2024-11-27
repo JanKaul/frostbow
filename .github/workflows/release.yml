@@ -20,6 +20,7 @@ jobs:
           - os-name: macOS-x86_64
             runs-on: macOS-latest
             target: x86_64-apple-darwin
+
         binary:
           - name: frostbow
           - name: frostbow-sql
@@ -32,7 +33,7 @@ jobs:
       - name: Build binary
         uses: houseabsolute/actions-rust-cross@v0
         with:
-          command: ${{ matrix.platform.command }}
+          command: "build"
           target: ${{ matrix.platform.target }}
           args: "--locked --release"
           working-directory: ${{ matrix.binary.name }}
