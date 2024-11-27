@@ -4,6 +4,7 @@ use clap::Parser;
 use datafusion::{
     execution::{context::SessionContext, SessionStateBuilder},
     logical_expr::ScalarUDF,
+    prelude::SessionConfig,
 };
 use datafusion_cli::{
     exec,
@@ -15,9 +16,9 @@ use datafusion_iceberg::{
     error::Error,
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
-use frostbow::{Args, IcebergContext};
-use iceberg_rust::catalog::bucket::ObjectStoreBuilder;
-use object_store::{aws::AmazonS3Builder, memory::InMemory};
+use frostbow::{get_storage, Args, IcebergContext};
+use iceberg_file_catalog::FileCatalogList;
+use iceberg_rust::catalog::CatalogList;
 
 #[cfg(feature = "rest")]
 use iceberg_rest_catalog::{apis::configuration::Configuration, catalog::RestCatalogList};
@@ -42,41 +43,39 @@ async fn main_inner() -> Result<(), Error> {
         "ICEBERG_CATALOG_URL".to_string(),
     ))?;
 
-    let bucket = args.bucket;
-
-    let username = args.username;
-    let password = args.password;
-
+    let storage = args.storage;
     let command = args.command;
 
-    let object_store = match &bucket {
-        Some(bucket) => {
-            let builder = AmazonS3Builder::from_env().with_bucket_name(bucket);
-
-            ObjectStoreBuilder::S3(builder)
-        }
-        _ => ObjectStoreBuilder::Memory(Arc::new(InMemory::new())),
-    };
+    let object_store = get_storage(storage.as_deref())?;
 
     #[cfg(feature = "rest")]
     let iceberg_catalog_list = {
-        let configuration = Configuration {
-            base_path: catalog_url,
-            user_agent: None,
-            client: reqwest_middleware::ClientBuilder::new(reqwest::Client::new()).build(),
-            basic_auth: username.map(|username| (username, password)),
-            oauth_access_token: None,
-            bearer_access_token: None,
-            api_key: None,
-        };
+        if catalog_url.starts_with("s3://") {
+            Arc::new(
+                FileCatalogList::new(&catalog_url, object_store)
+                    .await
+                    .map_err(iceberg_rust::error::Error::from)?,
+            ) as Arc<dyn CatalogList>
+        } else {
+            let configuration = Configuration {
+                base_path: catalog_url,
+                user_agent: None,
+                client: reqwest_middleware::ClientBuilder::new(reqwest::Client::new()).build(),
+                basic_auth: None,
+                oauth_access_token: None,
+                bearer_access_token: None,
+                api_key: None,
+            };
 
-        Arc::new(RestCatalogList::new(configuration, object_store))
+            Arc::new(RestCatalogList::new(configuration, object_store))
+        }
     };
 
     let catalog_list = Arc::new(IcebergCatalogList::new(iceberg_catalog_list.clone()).await?);
 
     let state = SessionStateBuilder::new()
         .with_default_features()
+        .with_config(SessionConfig::default().with_information_schema(true))
         .with_catalog_list(catalog_list)
         .with_query_planner(Arc::new(IcebergQueryPlanner {}))
         .build();

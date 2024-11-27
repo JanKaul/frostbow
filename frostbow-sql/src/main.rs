@@ -4,6 +4,7 @@ use clap::Parser;
 use datafusion::{
     execution::{context::SessionContext, SessionStateBuilder},
     logical_expr::ScalarUDF,
+    prelude::SessionConfig,
 };
 use datafusion_cli::{
     exec,
@@ -15,9 +16,7 @@ use datafusion_iceberg::{
     error::Error,
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
-use frostbow::{Args, IcebergContext};
-use iceberg_rust::catalog::bucket::ObjectStoreBuilder;
-use object_store::{aws::AmazonS3Builder, local::LocalFileSystem, memory::InMemory};
+use frostbow::{get_storage, Args, IcebergContext};
 
 use iceberg_sql_catalog::SqlCatalogList;
 
@@ -38,21 +37,10 @@ async fn main_inner() -> Result<(), Error> {
         "ICEBERG_CATALOG_URL".to_string(),
     ))?;
 
-    let bucket = args.bucket;
+    let storage = args.storage;
     let command = args.command;
 
-    let object_store = match &bucket {
-        Some(bucket) => {
-            if bucket.starts_with("s3://") {
-                let builder = AmazonS3Builder::from_env().with_bucket_name(bucket);
-
-                ObjectStoreBuilder::S3(builder)
-            } else {
-                ObjectStoreBuilder::Filesystem(Arc::new(LocalFileSystem::new()))
-            }
-        }
-        _ => ObjectStoreBuilder::Memory(Arc::new(InMemory::new())),
-    };
+    let object_store = get_storage(storage.as_deref())?;
 
     let iceberg_catalog_list = {
         Arc::new(
@@ -66,6 +54,7 @@ async fn main_inner() -> Result<(), Error> {
 
     let state = SessionStateBuilder::new()
         .with_default_features()
+        .with_config(SessionConfig::default().with_information_schema(true))
         .with_catalog_list(catalog_list)
         .with_query_planner(Arc::new(IcebergQueryPlanner {}))
         .build();

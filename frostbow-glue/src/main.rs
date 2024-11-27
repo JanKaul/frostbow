@@ -5,6 +5,7 @@ use clap::Parser;
 use datafusion::{
     catalog_common::MemoryCatalogProviderList,
     execution::{context::SessionContext, SessionStateBuilder},
+    prelude::SessionConfig,
 };
 use datafusion_cli::{
     exec,
@@ -14,10 +15,8 @@ use datafusion_cli::{
 use datafusion_iceberg::{
     catalog::catalog::IcebergCatalog, error::Error, planner::IcebergQueryPlanner,
 };
-use frostbow::{Args, IcebergContext};
+use frostbow::{get_storage, Args, IcebergContext};
 use iceberg_glue_catalog::GlueCatalog;
-use iceberg_rust::catalog::bucket::ObjectStoreBuilder;
-use object_store::{aws::AmazonS3Builder, local::LocalFileSystem};
 
 #[tokio::main]
 async fn main() -> ExitCode {
@@ -31,21 +30,10 @@ async fn main() -> ExitCode {
 async fn main_inner() -> Result<(), Error> {
     let args = Args::parse();
 
-    let bucket = args.bucket;
+    let storage = args.storage;
     let command = args.command;
 
-    let object_store: ObjectStoreBuilder = match &bucket {
-        Some(bucket) => {
-            if bucket.starts_with("s3://") {
-                let builder = AmazonS3Builder::from_env().with_bucket_name(bucket);
-
-                ObjectStoreBuilder::S3(builder)
-            } else {
-                ObjectStoreBuilder::Filesystem(Arc::new(LocalFileSystem::new()))
-            }
-        }
-        _ => ObjectStoreBuilder::memory(),
-    };
+    let object_store = get_storage(storage.as_deref())?;
 
     let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
 
@@ -64,6 +52,7 @@ async fn main_inner() -> Result<(), Error> {
 
     let state = SessionStateBuilder::new()
         .with_default_features()
+        .with_config(SessionConfig::default().with_information_schema(true))
         .with_catalog_list(iceberg_catalog_list)
         .with_query_planner(Arc::new(IcebergQueryPlanner {}))
         .build();

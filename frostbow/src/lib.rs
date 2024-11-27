@@ -1,5 +1,6 @@
 use async_trait::async_trait;
 use clap::Parser;
+use iceberg_rust::{catalog::bucket::ObjectStoreBuilder, error::Error};
 use std::sync::Arc;
 
 use datafusion::{
@@ -17,19 +18,19 @@ use datafusion_cli::{
     object_storage::{AwsOptions, GcpOptions},
 };
 use datafusion_iceberg::planner::iceberg_transform;
-use object_store::ObjectStore;
+use object_store::{memory::InMemory, ObjectStore};
 
 #[derive(Debug, Parser)]
 #[clap(version, about)]
 pub struct Args {
-    #[clap(short = 'u', long = "catalog-url")]
+    #[clap(short = 'u', long = "catalog-url", help = "The url of the catalog.")]
     pub catalog_url: Option<String>,
-    #[clap(short = 'b', long)]
-    pub bucket: Option<String>,
-    #[clap(short = 'U', long)]
-    pub username: Option<String>,
-    #[clap(short = 'W', long)]
-    pub password: Option<String>,
+    #[clap(
+        short = 's',
+        long,
+        help = "The storage backend to use. Can be 'aws', 'gcs'. Defaults to 'memory' if not set."
+    )]
+    pub storage: Option<String>,
     #[clap(short = 'c', long)]
     pub command: Vec<String>,
 }
@@ -76,5 +77,17 @@ impl CliSessionContext for IcebergContext {
     async fn execute_logical_plan(&self, plan: LogicalPlan) -> Result<DataFrame, DataFusionError> {
         let plan = plan.transform(iceberg_transform).data()?;
         self.0.execute_logical_plan(plan).await
+    }
+}
+
+pub fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Error> {
+    match storage {
+        Some("aws") => Ok(ObjectStoreBuilder::aws()),
+        Some("gcs") => Ok(ObjectStoreBuilder::gcs()),
+        None => Ok(ObjectStoreBuilder::Memory(Arc::new(InMemory::new()))),
+        Some(x) => Err(Error::InvalidFormat(format!(
+            "Storage {} is not supported.",
+            x
+        ))),
     }
 }
