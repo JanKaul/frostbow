@@ -12,7 +12,10 @@ clap = { version = "4.5", features = ["derive"] }
 datafusion = "43.0"
 datafusion-cli = "43.0"
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
-object_store = { version = "0.11.0", features = ["aws", "gcp"] }
+object_store = { version = "0.11.1", features = ["aws", "gcp"] }
 iceberg-rust = { git = "https://github.com/jankaul/iceberg-rust", version = "0.5" }
 datafusion_iceberg = { git = "https://github.com/jankaul/iceberg-rust", version = "0.5" }
 async-trait = "0.1"
+
+[patch.crates-io]
+object_store = { version = "0.11.1", features = ["aws", "gcp"], git = "https://github.com/apache/arrow-rs", rev = "c60ce14" }
