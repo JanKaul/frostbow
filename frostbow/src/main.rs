@@ -1,5 +1,6 @@
 use std::{process::ExitCode, sync::Arc};
 
+use aws_config::BehaviorVersion;
 use clap::Parser;
 use datafusion::{
     execution::{context::SessionContext, SessionStateBuilder},
@@ -18,10 +19,11 @@ use datafusion_iceberg::{
 };
 use frostbow::{get_storage, Args, IcebergContext};
 use iceberg_file_catalog::FileCatalogList;
-use iceberg_rust::catalog::CatalogList;
+use iceberg_rust::{catalog::CatalogList, error::Error as IcebergError};
 
 #[cfg(feature = "rest")]
 use iceberg_rest_catalog::{apis::configuration::Configuration, catalog::RestCatalogList};
+use iceberg_s3tables_catalog::S3TablesCatalogList;
 
 #[cfg(not(feature = "rest"))]
 compile_error!("feature \"rest\" must be enabled for cli");
@@ -38,10 +40,9 @@ async fn main() -> ExitCode {
 async fn main_inner() -> Result<(), Error> {
     let args = Args::parse();
 
-    let catalog_url = args.catalog_url.ok_or(Error::NotFound(
-        "Argument".to_string(),
-        "ICEBERG_CATALOG_URL".to_string(),
-    ))?;
+    let catalog_url = args
+        .catalog_url
+        .ok_or(IcebergError::NotFound("ICEBERG_CATALOG_URL".to_string()))?;
 
     let storage = args.storage;
     let command = args.command;
@@ -56,6 +57,14 @@ async fn main_inner() -> Result<(), Error> {
                     .await
                     .map_err(iceberg_rust::error::Error::from)?,
             ) as Arc<dyn CatalogList>
+        } else if catalog_url.starts_with("arn:") {
+            let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
+
+            Arc::new(S3TablesCatalogList::new(
+                &config,
+                &catalog_url,
+                object_store,
+            )) as Arc<dyn CatalogList>
         } else {
             let configuration = Configuration {
                 base_path: catalog_url,

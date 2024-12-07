@@ -20,8 +20,10 @@ reqwest = "0.11"
 reqwest-middleware = "0.2.0"
 iceberg-rest-catalog = {  git = "https://github.com/jankaul/iceberg-rust", version = "0.5", branch = "copy-if-not-exists"   , optional = true }
 iceberg-file-catalog = {  git = "https://github.com/jankaul/iceberg-rust", version = "0.5", branch = "copy-if-not-exists"   }
+iceberg-s3tables-catalog = {  git = "https://github.com/jankaul/iceberg-rust", version = "0.5", branch = "copy-if-not-exists"   }
 url = "2.5"
 openssl.workspace = true
+aws-config = "1.5.10"
 
 [features]
 default = ["rest"]

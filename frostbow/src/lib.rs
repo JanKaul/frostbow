@@ -82,7 +82,7 @@ impl CliSessionContext for IcebergContext {
 
 pub fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Error> {
     match storage {
-        Some("aws") => Ok(ObjectStoreBuilder::aws()),
+        Some("s3") => Ok(ObjectStoreBuilder::aws()),
         Some("gcs") => Ok(ObjectStoreBuilder::gcs()),
         None => Ok(ObjectStoreBuilder::Memory(Arc::new(InMemory::new()))),
         Some(x) => Err(Error::InvalidFormat(format!(

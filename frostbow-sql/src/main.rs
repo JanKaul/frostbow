@@ -17,6 +17,7 @@ use datafusion_iceberg::{
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
 use frostbow::{get_storage, Args, IcebergContext};
+use iceberg_rust::error::Error as IcebergError;
 
 use iceberg_sql_catalog::SqlCatalogList;
 
@@ -32,10 +33,9 @@ async fn main() -> ExitCode {
 async fn main_inner() -> Result<(), Error> {
     let args = Args::parse();
 
-    let catalog_url = args.catalog_url.ok_or(Error::NotFound(
-        "Argument".to_string(),
-        "ICEBERG_CATALOG_URL".to_string(),
-    ))?;
+    let catalog_url = args
+        .catalog_url
+        .ok_or(IcebergError::NotFound("ICEBERG_CATALOG_URL".to_string()))?;
 
     let storage = args.storage;
     let command = args.command;
