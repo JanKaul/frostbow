@@ -1,5 +1,7 @@
 use async_trait::async_trait;
+use aws_config::BehaviorVersion;
 use clap::Parser;
+use credentials::AwsCredentialProvider;
 use iceberg_rust::{catalog::bucket::ObjectStoreBuilder, error::Error};
 use std::sync::Arc;
 
@@ -18,12 +20,14 @@ use datafusion_cli::{
     object_storage::{AwsOptions, GcpOptions},
 };
 use datafusion_iceberg::planner::iceberg_transform;
-use object_store::{memory::InMemory, ObjectStore};
+use object_store::{aws::AmazonS3Builder, memory::InMemory, ObjectStore};
+
+pub mod credentials;
 
 #[derive(Debug, Parser)]
 #[clap(version, about)]
 pub struct Args {
-    #[clap(short = 'u', long = "catalog-url", help = "The url of the catalog.")]
+    #[clap(short = 'u', long = "catalog-url", help = "The URL of the catalog.")]
     pub catalog_url: Option<String>,
     #[clap(
         short = 's',
@@ -80,9 +84,16 @@ impl CliSessionContext for IcebergContext {
     }
 }
 
-pub fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Error> {
+pub async fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Error> {
     match storage {
-        Some("s3") => Ok(ObjectStoreBuilder::aws()),
+        Some("s3") => {
+            let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
+
+            Ok(ObjectStoreBuilder::S3(
+                AmazonS3Builder::new()
+                    .with_credentials(Arc::new(AwsCredentialProvider::new(&config))),
+            ))
+        }
         Some("gcs") => Ok(ObjectStoreBuilder::gcs()),
         None => Ok(ObjectStoreBuilder::Memory(Arc::new(InMemory::new()))),
         Some(x) => Err(Error::InvalidFormat(format!(

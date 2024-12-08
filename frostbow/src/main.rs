@@ -47,7 +47,7 @@ async fn main_inner() -> Result<(), Error> {
     let storage = args.storage;
     let command = args.command;
 
-    let object_store = get_storage(storage.as_deref())?;
+    let object_store = get_storage(storage.as_deref()).await?;
 
     #[cfg(feature = "rest")]
     let iceberg_catalog_list = {

@@ -33,7 +33,7 @@ async fn main_inner() -> Result<(), Error> {
     let storage = args.storage;
     let command = args.command;
 
-    let object_store = get_storage(storage.as_deref())?;
+    let object_store = get_storage(storage.as_deref()).await?;
 
     let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
 
