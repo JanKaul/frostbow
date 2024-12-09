@@ -6,17 +6,17 @@ use datafusion::{
     logical_expr::ScalarUDF,
     prelude::SessionConfig,
 };
-use datafusion_cli::{
-    exec,
-    print_format::PrintFormat,
-    print_options::{MaxRows, PrintOptions},
-};
 use datafusion_iceberg::{
     catalog::catalog_list::IcebergCatalogList,
     error::Error,
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
 use frostbow::{get_storage, Args, IcebergContext};
+use frostbow_cli::{
+    exec,
+    print_format::PrintFormat,
+    print_options::{MaxRows, PrintOptions},
+};
 use iceberg_rust::error::Error as IcebergError;
 
 use iceberg_sql_catalog::SqlCatalogList;

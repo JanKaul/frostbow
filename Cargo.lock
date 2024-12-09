@@ -886,9 +886,9 @@ checksum = "8c3c1a368f70d6cf7302d78f8f7093da241fb8e8807c05cc9e51a125895a6d5b"
 
 [[package]]
 name = "bigdecimal"
-version = "0.4.6"
+version = "0.4.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f850665a0385e070b64c38d2354e6c104c8479c59868d1e48a0c13ee2c7a1c1"
+checksum = "7f31f3af01c5c65a07985c804d3366560e6fa7883d640a122819b14ec327482c"
 dependencies = [
  "autocfg",
  "libm",
@@ -1108,9 +1108,9 @@ checksum = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
 
 [[package]]
 name = "chrono"
-version = "0.4.38"
+version = "0.4.39"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a21f936df1771bf62b77f047b726c4625ff2e8aa607c01ec06e5a05bd8463401"
+checksum = "7e36cc9d416881d2e24f9a963be5fb1cd90966419ac844274161d10488b3e825"
 dependencies = [
  "android-tzdata",
  "iana-time-zone",
@@ -1545,34 +1545,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "datafusion-cli"
-version = "43.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ab715aaa96de17bf8cb5329a83712ccda7b7941ab22f3e523989a3b3a0710cc1"
-dependencies = [
- "arrow",
- "async-trait",
- "aws-config",
- "aws-credential-types",
- "aws-sdk-sso",
- "aws-sdk-ssooidc",
- "aws-sdk-sts",
- "clap",
- "datafusion",
- "dirs",
- "env_logger",
- "futures",
- "mimalloc",
- "object_store",
- "parking_lot",
- "parquet",
- "regex",
- "rustyline",
- "tokio",
- "url",
-]
-
-[[package]]
 name = "datafusion-common"
 version = "43.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1908,8 +1880,8 @@ dependencies = [
 
 [[package]]
 name = "datafusion_iceberg"
-version = "0.5.8"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#f55efa810e06ffcf7244ab380cd22385a98454d0"
+version = "0.6.0"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#e02c926d02a5c083caf9b0bf3d00e2ccbe45bb9d"
 dependencies = [
  "async-trait",
  "chrono",
@@ -1922,7 +1894,7 @@ dependencies = [
  "object_store",
  "regex",
  "serde_json",
- "thiserror 2.0.4",
+ "thiserror 2.0.6",
  "tokio",
  "url",
  "uuid",
@@ -2134,9 +2106,9 @@ dependencies = [
 
 [[package]]
 name = "fastrand"
-version = "2.2.0"
+version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "486f806e73c5707928240ddc295403b1b93c96a02038563881c4a2fd84b81ac4"
+checksum = "37909eebbb50d72f9059c3b6d82c0463f2ff062c9e95845c43a6c9c0355411be"
 
 [[package]]
 name = "fd-lock"
@@ -2222,10 +2194,12 @@ version = "0.0.1"
 dependencies = [
  "async-trait",
  "aws-config",
+ "aws-credential-types",
  "clap",
  "datafusion",
- "datafusion-cli",
  "datafusion_iceberg",
+ "frostbow-cli",
+ "futures",
  "iceberg-file-catalog",
  "iceberg-rest-catalog",
  "iceberg-rust",
@@ -2239,6 +2213,34 @@ dependencies = [
 ]
 
 [[package]]
+name = "frostbow-cli"
+version = "43.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aefe0314490b23e0b5a4551d2b3f942d298856081e322a6727a23bb1b5367d67"
+dependencies = [
+ "arrow",
+ "async-trait",
+ "aws-config",
+ "aws-credential-types",
+ "aws-sdk-sso",
+ "aws-sdk-ssooidc",
+ "aws-sdk-sts",
+ "clap",
+ "datafusion",
+ "dirs",
+ "env_logger",
+ "futures",
+ "mimalloc",
+ "object_store",
+ "parking_lot",
+ "parquet",
+ "regex",
+ "rustyline",
+ "tokio",
+ "url",
+]
+
+[[package]]
 name = "frostbow-glue"
 version = "0.1.0"
 dependencies = [
@@ -2246,9 +2248,9 @@ dependencies = [
  "aws-config",
  "clap",
  "datafusion",
- "datafusion-cli",
  "datafusion_iceberg",
  "frostbow",
+ "frostbow-cli",
  "iceberg-glue-catalog",
  "iceberg-rust",
  "object_store",
@@ -2263,9 +2265,9 @@ dependencies = [
  "async-trait",
  "clap",
  "datafusion",
- "datafusion-cli",
  "datafusion_iceberg",
  "frostbow",
+ "frostbow-cli",
  "iceberg-rust",
  "iceberg-sql-catalog",
  "object_store",
@@ -2758,23 +2760,23 @@ dependencies = [
 
 [[package]]
 name = "iceberg-file-catalog"
-version = "0.5.8"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#f55efa810e06ffcf7244ab380cd22385a98454d0"
+version = "0.6.0"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#e02c926d02a5c083caf9b0bf3d00e2ccbe45bb9d"
 dependencies = [
  "async-trait",
  "futures",
  "iceberg-rust",
  "object_store",
  "serde_json",
- "thiserror 2.0.4",
+ "thiserror 2.0.6",
  "url",
  "uuid",
 ]
 
 [[package]]
 name = "iceberg-glue-catalog"
-version = "0.5.8"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#f55efa810e06ffcf7244ab380cd22385a98454d0"
+version = "0.6.0"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#e02c926d02a5c083caf9b0bf3d00e2ccbe45bb9d"
 dependencies = [
  "async-trait",
  "aws-config",
@@ -2783,15 +2785,15 @@ dependencies = [
  "iceberg-rust",
  "object_store",
  "serde_json",
- "thiserror 2.0.4",
+ "thiserror 2.0.6",
  "url",
  "uuid",
 ]
 
 [[package]]
 name = "iceberg-rest-catalog"
-version = "0.5.8"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#f55efa810e06ffcf7244ab380cd22385a98454d0"
+version = "0.6.0"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#e02c926d02a5c083caf9b0bf3d00e2ccbe45bb9d"
 dependencies = [
  "async-trait",
  "futures",
@@ -2811,8 +2813,8 @@ dependencies = [
 
 [[package]]
 name = "iceberg-rust"
-version = "0.5.8"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#f55efa810e06ffcf7244ab380cd22385a98454d0"
+version = "0.6.0"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#e02c926d02a5c083caf9b0bf3d00e2ccbe45bb9d"
 dependencies = [
  "apache-avro 0.17.0",
  "arrow",
@@ -2830,7 +2832,7 @@ dependencies = [
  "serde_json",
  "smallvec",
  "sqlparser",
- "thiserror 2.0.4",
+ "thiserror 2.0.6",
  "thrift",
  "tokio",
  "url",
@@ -2839,8 +2841,8 @@ dependencies = [
 
 [[package]]
 name = "iceberg-rust-spec"
-version = "0.5.8"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#f55efa810e06ffcf7244ab380cd22385a98454d0"
+version = "0.6.0"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#e02c926d02a5c083caf9b0bf3d00e2ccbe45bb9d"
 dependencies = [
  "apache-avro 0.17.0",
  "arrow-schema",
@@ -2857,15 +2859,15 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "serde_repr",
- "thiserror 2.0.4",
+ "thiserror 2.0.6",
  "url",
  "uuid",
 ]
 
 [[package]]
 name = "iceberg-s3tables-catalog"
-version = "0.5.8"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#f55efa810e06ffcf7244ab380cd22385a98454d0"
+version = "0.6.0"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#e02c926d02a5c083caf9b0bf3d00e2ccbe45bb9d"
 dependencies = [
  "async-trait",
  "aws-config",
@@ -2874,15 +2876,15 @@ dependencies = [
  "iceberg-rust",
  "object_store",
  "serde_json",
- "thiserror 2.0.4",
+ "thiserror 2.0.6",
  "url",
  "uuid",
 ]
 
 [[package]]
 name = "iceberg-sql-catalog"
-version = "0.5.8"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#f55efa810e06ffcf7244ab380cd22385a98454d0"
+version = "0.6.0"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#e02c926d02a5c083caf9b0bf3d00e2ccbe45bb9d"
 dependencies = [
  "async-trait",
  "futures",
@@ -2890,7 +2892,7 @@ dependencies = [
  "object_store",
  "serde_json",
  "sqlx",
- "thiserror 2.0.4",
+ "thiserror 2.0.6",
  "url",
  "uuid",
 ]
@@ -3146,9 +3148,9 @@ dependencies = [
 
 [[package]]
 name = "lexical-core"
-version = "1.0.3"
+version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "06d7a061b7feb8a4b233a4d90280d13e0965c4e0181566e9ad61af98e210ca9d"
+checksum = "b765c31809609075565a70b4b71402281283aeda7ecaf4818ac14a7b2ade8958"
 dependencies = [
  "lexical-parse-float",
  "lexical-parse-integer",
@@ -3159,9 +3161,9 @@ dependencies = [
 
 [[package]]
 name = "lexical-parse-float"
-version = "1.0.3"
+version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0029bdee2a94a6c4393a86f7e6921c90f234218fa4f2154bc001c92bc51e8bf5"
+checksum = "de6f9cb01fb0b08060209a057c048fcbab8717b4c1ecd2eac66ebfe39a65b0f2"
 dependencies = [
  "lexical-parse-integer",
  "lexical-util",
@@ -3170,9 +3172,9 @@ dependencies = [
 
 [[package]]
 name = "lexical-parse-integer"
-version = "1.0.3"
+version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "440a2398a08def518ff962b69e7146246c53bad8090e2b75d95fd5a469338958"
+checksum = "72207aae22fc0a121ba7b6d479e42cbfea549af1479c3f3a4f12c70dd66df12e"
 dependencies = [
  "lexical-util",
  "static_assertions",
@@ -3180,18 +3182,18 @@ dependencies = [
 
 [[package]]
 name = "lexical-util"
-version = "1.0.4"
+version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3100209587e35b13881068ce5a41241b112e0500b4d847ba16be172829c112ff"
+checksum = "ee72ef7886d94f30741743126c1ec123564749ee339281b9834d0e913f2d40fe"
 dependencies = [
  "static_assertions",
 ]
 
 [[package]]
 name = "lexical-write-float"
-version = "1.0.3"
+version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "27adf08e2f91ff44ab54bbac0c4579303f0865730870f91b58c044df821f114c"
+checksum = "c5afc668a27f460fb45a81a757b6bf2f43c2d7e30cb5a2dcd3abf294c78d62bd"
 dependencies = [
  "lexical-util",
  "lexical-write-integer",
@@ -3200,9 +3202,9 @@ dependencies = [
 
 [[package]]
 name = "lexical-write-integer"
-version = "1.0.3"
+version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8b4e5d27d742da13f013765f849efc0c4b6173e0e64404546475eb5ee0931e2c"
+checksum = "629ddff1a914a836fb245616a7888b62903aae58fa771e1d83943035efa0f978"
 dependencies = [
  "lexical-util",
  "static_assertions",
@@ -3210,9 +3212,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.167"
+version = "0.2.168"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09d6582e104315a817dff97f75133544b2e094ee22447d2acf4a74e189ba06fc"
+checksum = "5aaeb2981e0606ca11d79718f8bb01164f1d6ed75080182d3abf017e6d244b6d"
 
 [[package]]
 name = "libflate"
@@ -3967,7 +3969,7 @@ dependencies = [
  "rustc-hash",
  "rustls 0.23.19",
  "socket2",
- "thiserror 2.0.4",
+ "thiserror 2.0.6",
  "tokio",
  "tracing",
 ]
@@ -3986,7 +3988,7 @@ dependencies = [
  "rustls 0.23.19",
  "rustls-pki-types",
  "slab",
- "thiserror 2.0.4",
+ "thiserror 2.0.6",
  "tinyvec",
  "tracing",
  "web-time",
@@ -3994,9 +3996,9 @@ dependencies = [
 
 [[package]]
 name = "quinn-udp"
-version = "0.5.7"
+version = "0.5.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d5a626c6807713b15cac82a6acaccd6043c9a5408c24baae07611fec3f243da"
+checksum = "52cd4b1eff68bf27940dd39811292c49e007f4d0b4c357358dc9b0197be6b527"
 dependencies = [
  "cfg_aliases 0.2.1",
  "libc",
@@ -4337,15 +4339,15 @@ dependencies = [
 
 [[package]]
 name = "rustix"
-version = "0.38.41"
+version = "0.38.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d7f649912bc1495e167a6edee79151c84b1bad49748cb4f1f1167f459f6224f6"
+checksum = "f93dc38ecbab2eb790ff964bb77fa94faf256fd3e73285fd7ba0903b76bedb85"
 dependencies = [
  "bitflags 2.6.0",
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -5213,11 +5215,11 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "2.0.4"
+version = "2.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f49a1853cf82743e3b7950f77e0f4d622ca36cf4317cba00c767838bac8d490"
+checksum = "8fec2a1820ebd077e2b90c4df007bebf344cd394098a13c563957d0afc83ea47"
 dependencies = [
- "thiserror-impl 2.0.4",
+ "thiserror-impl 2.0.6",
 ]
 
 [[package]]
@@ -5233,9 +5235,9 @@ dependencies = [
 
 [[package]]
 name = "thiserror-impl"
-version = "2.0.4"
+version = "2.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8381894bb3efe0c4acac3ded651301ceee58a15d47c2e34885ed1908ad667061"
+checksum = "d65750cab40f4ff1929fb1ba509e9914eb756131cef4210da8d5d700d26f6312"
 dependencies = [
  "proc-macro2",
  "quote",

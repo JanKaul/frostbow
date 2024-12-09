@@ -10,12 +10,12 @@ license = "Apache-2.0"
 [dependencies]
 clap = { workspace = true }
 datafusion = { workspace = true }
-datafusion-cli = { workspace = true }
+frostbow-cli = { workspace = true }
 tokio = { workspace = true }
 object_store = { workspace = true }
 iceberg-rust = { workspace = true }
 datafusion_iceberg = { workspace = true }
-iceberg-sql-catalog = { git = "https://github.com/jankaul/iceberg-rust", version = "0.5", branch = "copy-if-not-exists" }
+iceberg-sql-catalog = { git = "https://github.com/jankaul/iceberg-rust", version = "0.6", branch = "copy-if-not-exists" }
 async-trait = { workspace = true }
 sqlx = { version = "0.8", features = ["runtime-tokio", "tls-rustls", "any", "sqlite", "postgres", "mysql"], default-features = false }
 frostbow = { path = "../frostbow", no-default-features = true }

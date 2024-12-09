@@ -1,21 +1,42 @@
 # Frostbow
 
-A small wrapper around the Datafusion query engine to use Datafusion with Apache Iceberg
+Frostbow is a [Apache Datafusion](https://github.com/apache/datafusion) distribution with support for Apache Iceberg.
 
 ## Usage
 
-Start the Frostbow cli with a sql catalog:
+Start the Frostbow cli with a s3tables catalog:
 
 ```bash
-frostbow-sql -u postgres://user:password@localhost:5432 -b s3://my-bucket
+frostbow -s s3 -u arn:aws:s3tables:us-east-1:123456789:bucket/my-bucket-prefix
 ```
 
 Pass object-store credentials:
 ```bash
-AWS_ACCESS_KEY_ID=... AWS_SECRET_ACCESS_KEY=... frostbow-sql -u postgres://user:password@localhost:5432 -b s3://my-bucket
+AWS_ACCESS_KEY_ID=... AWS_SECRET_ACCESS_KEY=... frostbow -s s3 -u arn:aws:s3tables:us-east-1:123456789:bucket/my-bucket-prefix
 ```
 
+## Parameters
+
+| Parameter | Description |
+|-----------|-------------|
+| `-u`  | URL of the catalog. If it starts with "arn:.." the S3Tables catalog is used, if it starts with "s3://..." the filesystem catalog is used. Please refer to the catalog documentation for more details. |
+| `-s`  | Storage backend. Can be either `s3` or `gcs`. Defaults to 's3'. |
+
+## Catalogs
+
+Frostbow comes bundled with support for the S3Tables and Filesystem catalogs. Please read the Documentation for further information.
+
+- [S3Tables](README-s3tables.md)
+- [Filesystem](README-file.md)
+
+If you want to use Frostbow with the SQL or Glue catalog, please visit the corresponding crates:
+
+- [SQL](frostbow-sql/README.md)
+- [Glue](frostbow-glue/README.md)
+
 ## Commands
+
+For general Datafusion usage please refer to the [Datafusion SQL Reference](https://datafusion.apache.org/user-guide/sql/index.html).
 
 ### Create table
 
@@ -30,7 +51,7 @@ CREATE EXTERNAL TABLE iceberg.public.orders (
 )
 STORED AS ICEBERG
 PARTITIONED BY ( "month(order_date)" )
-LOCATION 's3://iceberg/orders';
+LOCATION '';
 ```
 
 ### Insert
@@ -52,33 +73,10 @@ INSERT INTO iceberg.public.orders (id, order_date, customer_id, total_price) VAL
         (10, '2022-03-10', 6, 60.00);
 ```
 
-### Create Materialized View
+### Create schema
 
-Create an Iceberg Materialized View
-
-```sql
-
-CREATE MATERIALIZED VIEW iceberg.public.monthly_sales_by_segment AS 
-    select 
-        sum(o.total_price), 
-        date_trunc('month', o.order_date::timestamp)::date as month,
-        c.segment
-    from 
-        iceberg.public.orders as o
-    join
-        iceberg.public.customers as c
-    on
-        o.customer_id = c.id
-    group by 
-        month,
-        c.segment;
-
-```
-
-### Refresh Materialzied View
-
-Refresh the Materialized View given a specific identifier
+Create a schema in the iceberg catalog:
 
 ```sql
-select refresh_materialized_view('iceberg.public.monthly_sales_by_segment');
+CREATE SCHEMA iceberg.public;
 ```

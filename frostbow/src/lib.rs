@@ -2,7 +2,7 @@ use async_trait::async_trait;
 use aws_config::BehaviorVersion;
 use clap::Parser;
 use credentials::AwsCredentialProvider;
-use iceberg_rust::{catalog::bucket::ObjectStoreBuilder, error::Error};
+use iceberg_rust::{error::Error, object_store::ObjectStoreBuilder};
 use std::sync::Arc;
 
 use datafusion::{
@@ -15,11 +15,11 @@ use datafusion::{
     },
     logical_expr::LogicalPlan,
 };
-use datafusion_cli::{
+use datafusion_iceberg::planner::iceberg_transform;
+use frostbow_cli::{
     cli_context::CliSessionContext,
     object_storage::{AwsOptions, GcpOptions},
 };
-use datafusion_iceberg::planner::iceberg_transform;
 use object_store::{aws::AmazonS3Builder, memory::InMemory, ObjectStore};
 
 pub mod credentials;

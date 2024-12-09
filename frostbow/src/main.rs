@@ -7,17 +7,17 @@ use datafusion::{
     logical_expr::ScalarUDF,
     prelude::SessionConfig,
 };
-use datafusion_cli::{
-    exec,
-    print_format::PrintFormat,
-    print_options::{MaxRows, PrintOptions},
-};
 use datafusion_iceberg::{
     catalog::catalog_list::IcebergCatalogList,
     error::Error,
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
 use frostbow::{get_storage, Args, IcebergContext};
+use frostbow_cli::{
+    exec,
+    print_format::PrintFormat,
+    print_options::{MaxRows, PrintOptions},
+};
 use iceberg_file_catalog::FileCatalogList;
 use iceberg_rust::{catalog::CatalogList, error::Error as IcebergError};
 
@@ -44,7 +44,7 @@ async fn main_inner() -> Result<(), Error> {
         .catalog_url
         .ok_or(IcebergError::NotFound("ICEBERG_CATALOG_URL".to_string()))?;
 
-    let storage = args.storage;
+    let storage = args.storage.or(Some("s3".to_owned()));
     let command = args.command;
 
     let object_store = get_storage(storage.as_deref()).await?;
