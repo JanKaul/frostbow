@@ -35,8 +35,10 @@ pub struct Args {
         help = "The storage backend to use. Can be 'aws', 'gcs'. Defaults to 'memory' if not set."
     )]
     pub storage: Option<String>,
-    #[clap(short = 'c', long)]
+    #[clap(short = 'c', long, help = "Execute the given command.")]
     pub command: Vec<String>,
+    #[clap(short = 'f', long, help = "Execute the given files.")]
+    pub file: Vec<String>,
 }
 
 pub struct IcebergContext(pub SessionContext);

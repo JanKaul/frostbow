@@ -32,6 +32,7 @@ async fn main_inner() -> Result<(), Error> {
 
     let storage = args.storage;
     let command = args.command;
+    let files = args.file;
 
     let object_store = get_storage(storage.as_deref()).await?;
 
@@ -72,14 +73,18 @@ async fn main_inner() -> Result<(), Error> {
 
     let mut ctx = IcebergContext(ctx);
 
-    if command.is_empty() {
-        exec::exec_from_repl(&mut ctx, &mut print_options)
-            .await
-            .unwrap();
-    } else {
+    if !command.is_empty() {
         exec::exec_from_commands(&mut ctx, command, &mut print_options)
             .await
             .unwrap()
+    } else if !files.is_empty() {
+        exec::exec_from_files(&mut ctx, files, &mut print_options)
+            .await
+            .unwrap();
+    } else {
+        exec::exec_from_repl(&mut ctx, &mut print_options)
+            .await
+            .unwrap();
     }
 
     Ok(())
