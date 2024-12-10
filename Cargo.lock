@@ -1881,7 +1881,7 @@ dependencies = [
 [[package]]
 name = "datafusion_iceberg"
 version = "0.6.0"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#1737fb0def2069f849f3ff6f42edeb58f9d91775"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#b6120eb87b00eabce184c3e70832b284fb1a14a3"
 dependencies = [
  "async-trait",
  "chrono",
@@ -2214,9 +2214,9 @@ dependencies = [
 
 [[package]]
 name = "frostbow-cli"
-version = "43.0.0"
+version = "43.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aefe0314490b23e0b5a4551d2b3f942d298856081e322a6727a23bb1b5367d67"
+checksum = "a3c3202f9c72e1b42f1b7b897903417dce9e93e6346560ed2532605efabde535"
 dependencies = [
  "arrow",
  "async-trait",
@@ -2761,7 +2761,7 @@ dependencies = [
 [[package]]
 name = "iceberg-file-catalog"
 version = "0.6.0"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#1737fb0def2069f849f3ff6f42edeb58f9d91775"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#b6120eb87b00eabce184c3e70832b284fb1a14a3"
 dependencies = [
  "async-trait",
  "futures",
@@ -2776,7 +2776,7 @@ dependencies = [
 [[package]]
 name = "iceberg-glue-catalog"
 version = "0.6.0"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#1737fb0def2069f849f3ff6f42edeb58f9d91775"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#b6120eb87b00eabce184c3e70832b284fb1a14a3"
 dependencies = [
  "async-trait",
  "aws-config",
@@ -2793,7 +2793,7 @@ dependencies = [
 [[package]]
 name = "iceberg-rest-catalog"
 version = "0.6.0"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#1737fb0def2069f849f3ff6f42edeb58f9d91775"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#b6120eb87b00eabce184c3e70832b284fb1a14a3"
 dependencies = [
  "async-trait",
  "futures",
@@ -2814,7 +2814,7 @@ dependencies = [
 [[package]]
 name = "iceberg-rust"
 version = "0.6.0"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#1737fb0def2069f849f3ff6f42edeb58f9d91775"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#b6120eb87b00eabce184c3e70832b284fb1a14a3"
 dependencies = [
  "apache-avro 0.17.0",
  "arrow",
@@ -2842,7 +2842,7 @@ dependencies = [
 [[package]]
 name = "iceberg-rust-spec"
 version = "0.6.0"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#1737fb0def2069f849f3ff6f42edeb58f9d91775"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#b6120eb87b00eabce184c3e70832b284fb1a14a3"
 dependencies = [
  "apache-avro 0.17.0",
  "arrow-schema",
@@ -2867,7 +2867,7 @@ dependencies = [
 [[package]]
 name = "iceberg-s3tables-catalog"
 version = "0.6.0"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#1737fb0def2069f849f3ff6f42edeb58f9d91775"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#b6120eb87b00eabce184c3e70832b284fb1a14a3"
 dependencies = [
  "async-trait",
  "aws-config",
@@ -2884,7 +2884,7 @@ dependencies = [
 [[package]]
 name = "iceberg-sql-catalog"
 version = "0.6.0"
-source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#1737fb0def2069f849f3ff6f42edeb58f9d91775"
+source = "git+https://github.com/jankaul/iceberg-rust?branch=copy-if-not-exists#b6120eb87b00eabce184c3e70832b284fb1a14a3"
 dependencies = [
  "async-trait",
  "futures",
@@ -3182,9 +3182,9 @@ dependencies = [
 
 [[package]]
 name = "lexical-util"
-version = "1.0.5"
+version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee72ef7886d94f30741743126c1ec123564749ee339281b9834d0e913f2d40fe"
+checksum = "5a82e24bf537fd24c177ffbbdc6ebcc8d54732c35b50a3f28cc3f4e4c949a0b3"
 dependencies = [
  "static_assertions",
 ]

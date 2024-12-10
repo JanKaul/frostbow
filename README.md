@@ -1,18 +1,13 @@
 # Frostbow
 
-Frostbow is a [Apache Datafusion](https://github.com/apache/datafusion) distribution with support for Apache Iceberg.
+Frostbow is an [Apache Datafusion](https://github.com/apache/datafusion) distribution with support for Apache Iceberg. It is a fast, in-process, analytical query engine tailored to work with Iceberg. It supports reading and writing Iceberg tables and comes with all the capabilities of Datafusion.
 
 ## Usage
 
-Start the Frostbow cli with a s3tables catalog:
+Start the Frostbow cli with a S3Tables catalog:
 
 ```bash
-frostbow -s s3 -u arn:aws:s3tables:us-east-1:123456789:bucket/my-bucket-prefix
-```
-
-Pass object-store credentials:
-```bash
-AWS_ACCESS_KEY_ID=... AWS_SECRET_ACCESS_KEY=... frostbow -s s3 -u arn:aws:s3tables:us-east-1:123456789:bucket/my-bucket-prefix
+frostbow -u arn:aws:s3tables:us-east-1:123456789:bucket/my-bucket-prefix-
 ```
 
 ## Parameters
@@ -34,29 +29,36 @@ If you want to use Frostbow with the SQL or Glue catalog, please visit the corre
 - [SQL](frostbow-sql/README.md)
 - [Glue](frostbow-glue/README.md)
 
+## Installation
+
+Please refer to the [Installation guide](Installation.md).
+
 ## Commands
 
-For general Datafusion usage please refer to the [Datafusion SQL Reference](https://datafusion.apache.org/user-guide/sql/index.html).
+The following are SQL commands that are specific to Frostbow, for general Datafusion usage please refer to the [Datafusion SQL Reference](https://datafusion.apache.org/user-guide/sql/index.html).
 
 ### Create table
 
 Create an Iceberg Table in object storage:
 
 ```sql
-CREATE EXTERNAL TABLE iceberg.public.orders (
+CREATE TABLE iceberg.public.orders (
       id BIGINT NOT NULL,
       order_date DATE NOT NULL,
       customer_id INTEGER NOT NULL,
       total_price DOUBLE NOT NULL
 )
 STORED AS ICEBERG
-PARTITIONED BY ( "month(order_date)" )
-LOCATION '';
+LOCATION ''
+PARTITIONED BY ( "month(order_date)" );
 ```
+
+For the S3Tables and File catalog, the location is set by the catalog. However, you still need to pass an empty string as an argument. 
+For the other catalogs, the location has to be set correctly.
 
 ### Insert
 
-Insert data into an ieberg table
+Insert data into an iceberg table
 
 ```sql
 

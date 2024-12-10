@@ -10,7 +10,7 @@ members = [
 openssl = { version = "0.10", features = ["vendored"] }
 clap = { version = "4.5", features = ["derive"] }
 datafusion = "43.0"
-frostbow-cli = "43.0"
+frostbow-cli = { version = "43.1" }
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 object_store = { version = "0.11.1", features = ["aws", "gcp"] }
 iceberg-rust = { git = "https://github.com/jankaul/iceberg-rust", version = "0.6", branch = "copy-if-not-exists"   }
