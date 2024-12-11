@@ -1,6 +1,6 @@
 # Frostbow
 
-Frostbow is an [Apache Datafusion](https://github.com/apache/datafusion) distribution with support for Apache Iceberg. It is a fast, in-process, analytical query engine tailored to work with Iceberg. It supports reading and writing Iceberg tables and comes with all the capabilities of Datafusion.
+Frostbow is an [Apache Datafusion](https://github.com/apache/datafusion) distribution with integration for Apache Iceberg. It offers a high-performance, in-process analytical query engine optimized for Iceberg tables. Frostbow combines the robust capabilities of Datafusion with native support for reading and writing Iceberg tables.
 
 ## Usage
 
@@ -32,6 +32,10 @@ If you want to use Frostbow with the SQL or Glue catalog, please visit the corre
 ## Installation
 
 Please refer to the [Installation guide](Installation.md).
+
+## Examples
+
+- [Insert csv](examples/copy-csv.md)
 
 ## Commands
 

@@ -2,34 +2,34 @@
 
 ## MacOS
 
-### Homebrew
+#### Homebrew
 
 ```bash
 brew tap jankaul/frostbow
 brew install jankaul/frostbow/frostbow
 ```
 
-### Download
+#### Download
 
 X86:
 ```bash
-wget -qO- https://github.com/jankaul/frostbow/releases/download/v0.1.0/frostbow-macOS-x86_64.tar.gz | tar xvz
+wget -qO- https://github.com/JanKaul/frostbow/releases/download/v0.2.0/frostbow-macOS-x86_64.tar.gz | tar xvz
 ```
 
 Arm:
 ```bash
-wget -qO- https://github.com/jankaul/frostbow/releases/download/v0.1.0/frostbow-macOS-aarch64.tar.gz | tar xvz
+wget -qO- https://github.com/JanKaul/frostbow/releases/download/v0.2.0/frostbow-macOS-arm64.tar.gz | tar xvz
 ```
 
 ## Linux
 
 ```bash
-wget -qO- https://github.com/jankaul/frostbow/releases/download/v0.1.0/frostbow-linux-x86_64.tar.gz | tar xvz
+wget -qO- https://github.com/JanKaul/frostbow/releases/download/v0.2.0/frostbow-Linux-gnu-x86_64.tar.gz | tar xvz
 ```
 
 ## Windows
 
-[https://github.com/jankaul/frostbow/releases/download/v0.1.0/frostbow-windows-x86_64.zip](https://github.com/jankaul/frostbow/releases/download/v0.1.0/frostbow-windows-x86_64.zip)
+[https://github.com/JanKaul/frostbow/releases/download/v0.2.0/frostbow-Windows-msvc-x86_64.zip](https://github.com/JanKaul/frostbow/releases/download/v0.2.0/frostbow-Windows-msvc-x86_64.zip)
 
 ## Cargo
 
