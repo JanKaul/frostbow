@@ -92,7 +92,7 @@ pub async fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Er
             let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
 
             Ok(ObjectStoreBuilder::S3(
-                AmazonS3Builder::new()
+                AmazonS3Builder::from_env()
                     .with_credentials(Arc::new(AwsCredentialProvider::new(&config))),
             ))
         }
