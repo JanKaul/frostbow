@@ -87,7 +87,7 @@ async fn main_inner() -> Result<(), Error> {
         .with_default_features()
         .with_config(SessionConfig::default().with_information_schema(true))
         .with_catalog_list(catalog_list)
-        .with_query_planner(Arc::new(IcebergQueryPlanner {}))
+        .with_query_planner(Arc::new(IcebergQueryPlanner::new()))
         .build();
 
     let mut print_options = PrintOptions {
