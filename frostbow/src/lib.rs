@@ -20,7 +20,7 @@ use frostbow_cli::{
     cli_context::CliSessionContext,
     object_storage::{AwsOptions, GcpOptions},
 };
-use object_store::{aws::AmazonS3Builder, memory::InMemory, ObjectStore};
+use object_store::{aws::AmazonS3Builder, local::LocalFileSystem, memory::InMemory, ObjectStore};
 
 pub mod credentials;
 
@@ -104,6 +104,9 @@ pub async fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Er
             ))))
         }
         Some("gcs") => Ok(ObjectStoreBuilder::gcs()),
+        Some("file") => Ok(ObjectStoreBuilder::Filesystem(Arc::new(
+            LocalFileSystem::new(),
+        ))),
         None => Ok(ObjectStoreBuilder::Memory(Arc::new(InMemory::new()))),
         Some(x) => Err(Error::InvalidFormat(format!(
             "Storage {} is not supported.",
