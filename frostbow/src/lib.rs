@@ -91,10 +91,17 @@ pub async fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Er
         Some("s3") => {
             let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
 
-            Ok(ObjectStoreBuilder::S3(
-                AmazonS3Builder::from_env()
-                    .with_credentials(Arc::new(AwsCredentialProvider::new(&config))),
-            ))
+            let mut builder = AmazonS3Builder::new();
+            if let Some(region) = config.region() {
+                builder = builder.with_region(region.as_ref());
+            }
+            if let Some(endpoint) = config.endpoint_url() {
+                builder = builder.with_endpoint(endpoint)
+            }
+
+            Ok(ObjectStoreBuilder::S3(builder.with_credentials(Arc::new(
+                AwsCredentialProvider::new(&config),
+            ))))
         }
         Some("gcs") => Ok(ObjectStoreBuilder::gcs()),
         None => Ok(ObjectStoreBuilder::Memory(Arc::new(InMemory::new()))),
