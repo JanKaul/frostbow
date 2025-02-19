@@ -1,11 +1,17 @@
-use std::{process::ExitCode, sync::Arc};
+use std::{process::ExitCode, str::FromStr, sync::Arc};
 
 use aws_config::BehaviorVersion;
+use aws_credential_types::provider::ProvideCredentials;
 use clap::Parser;
 use datafusion::{
     execution::{context::SessionContext, SessionStateBuilder},
     logical_expr::ScalarUDF,
     prelude::SessionConfig,
+};
+use datafusion_cli::{
+    exec,
+    print_format::PrintFormat,
+    print_options::{MaxRows, PrintOptions},
 };
 use datafusion_iceberg::{
     catalog::catalog_list::IcebergCatalogList,
@@ -13,17 +19,17 @@ use datafusion_iceberg::{
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
 use frostbow::{get_storage, Args, IcebergContext};
-use frostbow_cli::{
-    exec,
-    print_format::PrintFormat,
-    print_options::{MaxRows, PrintOptions},
-};
 use iceberg_file_catalog::FileCatalogList;
+use iceberg_rest_catalog::{
+    apis::configuration::{AWSv4Key, ConfigurationBuilder},
+    catalog::RestNoPrefixCatalogList,
+};
 use iceberg_rust::{catalog::CatalogList, error::Error as IcebergError};
 
 #[cfg(feature = "rest")]
-use iceberg_rest_catalog::{apis::configuration::Configuration, catalog::RestCatalogList};
+use iceberg_rest_catalog::catalog::RestCatalogList;
 use iceberg_s3tables_catalog::S3TablesCatalogList;
+use secrecy::SecretString;
 
 #[cfg(not(feature = "rest"))]
 compile_error!("feature \"rest\" must be enabled for cli");
@@ -40,7 +46,7 @@ async fn main() -> ExitCode {
 async fn main_inner() -> Result<(), Error> {
     let args = Args::parse();
 
-    let catalog_url = args
+    let mut catalog_url = args
         .catalog_url
         .ok_or(IcebergError::NotFound("ICEBERG_CATALOG_URL".to_string()))?;
 
@@ -66,16 +72,52 @@ async fn main_inner() -> Result<(), Error> {
                 &catalog_url,
                 object_store,
             )) as Arc<dyn CatalogList>
-        } else {
-            let configuration = Configuration {
-                base_path: catalog_url,
-                user_agent: None,
-                client: reqwest_middleware::ClientBuilder::new(reqwest::Client::new()).build(),
-                basic_auth: None,
-                oauth_access_token: None,
-                bearer_access_token: None,
-                api_key: None,
+        } else if catalog_url.starts_with("https://glue") {
+            let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
+
+            if catalog_url == "https://glue" {
+                catalog_url.push_str(&format!(
+                    ".{}.amazonaws.com/iceberg",
+                    &config
+                        .region()
+                        .ok_or(IcebergError::InvalidFormat("Region missing.".to_owned()))?
+                        .to_string(),
+                ));
+            }
+
+            let credentials = config
+                .credentials_provider()
+                .ok_or(IcebergError::NotFound("Region".to_owned()))?
+                .provide_credentials()
+                .await
+                .unwrap();
+
+            let aws_key = AWSv4Key {
+                access_key: credentials.access_key_id().to_owned(),
+                secret_key: SecretString::from_str(credentials.secret_access_key()).unwrap(),
+                region: config
+                    .region()
+                    .ok_or(IcebergError::NotFound("Region".to_owned()))?
+                    .to_string(),
+                service: "glue".to_owned(),
             };
+
+            let configuration = ConfigurationBuilder::default()
+                .base_path(catalog_url.clone())
+                .aws_v4_key(aws_key)
+                .build()
+                .unwrap();
+
+            Arc::new(RestNoPrefixCatalogList::new(
+                "iceberg",
+                configuration,
+                object_store,
+            )) as Arc<dyn CatalogList>
+        } else {
+            let configuration = ConfigurationBuilder::default()
+                .base_path(catalog_url.clone())
+                .build()
+                .unwrap();
 
             Arc::new(RestCatalogList::new(configuration, object_store))
         }

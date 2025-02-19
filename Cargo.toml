@@ -9,13 +9,11 @@ members = [
 [workspace.dependencies]
 openssl = { version = "0.10", features = ["vendored"] }
 clap = { version = "4.5", features = ["derive"] }
-datafusion = "43.0"
-frostbow-cli = { version = "43.1" }
+datafusion = "45.0"
+datafusion-cli = { version = "45" }
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
-object_store = { version = "0.11.1", features = ["aws", "gcp"] }
-iceberg-rust = { git = "https://github.com/jankaul/iceberg-rust", version = "0.6", branch = "copy-if-not-exists"   }
-datafusion_iceberg = { git = "https://github.com/jankaul/iceberg-rust", version = "0.6", branch = "copy-if-not-exists"   }
+object_store = { version = "0.11.2", features = ["aws", "gcp"] }
+iceberg-rust = { version = "0.7" }
+datafusion_iceberg = { version = "0.7" }
 async-trait = "0.1"
 
-[patch.crates-io]
-object_store = { version = "0.11.1", features = ["aws", "gcp"], git = "https://github.com/apache/arrow-rs", rev = "c60ce14" }

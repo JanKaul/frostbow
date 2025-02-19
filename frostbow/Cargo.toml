@@ -10,7 +10,7 @@ license = "Apache-2.0"
 [dependencies]
 clap = { workspace = true }
 datafusion = { workspace = true }
-frostbow-cli = { workspace = true }
+datafusion-cli = { workspace = true }
 tokio = { workspace = true }
 object_store = { workspace = true }
 iceberg-rust = { workspace = true }
@@ -18,14 +18,15 @@ datafusion_iceberg = { workspace = true }
 async-trait = { workspace = true }
 reqwest = "0.11"
 reqwest-middleware = "0.2.0"
-iceberg-rest-catalog = {  git = "https://github.com/jankaul/iceberg-rust", version = "0.6", branch = "copy-if-not-exists"   , optional = true }
-iceberg-file-catalog = {  git = "https://github.com/jankaul/iceberg-rust", version = "0.6", branch = "copy-if-not-exists"   }
-iceberg-s3tables-catalog = {  git = "https://github.com/jankaul/iceberg-rust", version = "0.6", branch = "copy-if-not-exists"   }
+iceberg-rest-catalog = {  version = "0.7", optional = true }
+iceberg-file-catalog = {  version = "0.7" }
+iceberg-s3tables-catalog = { version = "0.7" }
 url = "2.5"
 openssl.workspace = true
-aws-config = "1.5.10"
+aws-config = "1.5.16"
 aws-credential-types = "1.2.1"
 futures = "0.3.31"
+secrecy = "0.8"
 
 [features]
 default = ["rest"]

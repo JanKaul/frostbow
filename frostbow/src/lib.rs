@@ -15,11 +15,11 @@ use datafusion::{
     },
     logical_expr::LogicalPlan,
 };
-use datafusion_iceberg::planner::iceberg_transform;
-use frostbow_cli::{
+use datafusion_cli::{
     cli_context::CliSessionContext,
     object_storage::{AwsOptions, GcpOptions},
 };
+use datafusion_iceberg::planner::iceberg_transform;
 use object_store::{aws::AmazonS3Builder, local::LocalFileSystem, memory::InMemory, ObjectStore};
 
 pub mod credentials;

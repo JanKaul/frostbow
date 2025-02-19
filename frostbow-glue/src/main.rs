@@ -3,19 +3,19 @@ use std::{process::ExitCode, sync::Arc};
 use aws_config::BehaviorVersion;
 use clap::Parser;
 use datafusion::{
-    catalog_common::MemoryCatalogProviderList,
+    catalog::MemoryCatalogProviderList,
     execution::{context::SessionContext, SessionStateBuilder},
     prelude::SessionConfig,
+};
+use datafusion_cli::{
+    exec,
+    print_format::PrintFormat,
+    print_options::{MaxRows, PrintOptions},
 };
 use datafusion_iceberg::{
     catalog::catalog::IcebergCatalog, error::Error, planner::IcebergQueryPlanner,
 };
 use frostbow::{get_storage, Args, IcebergContext};
-use frostbow_cli::{
-    exec,
-    print_format::PrintFormat,
-    print_options::{MaxRows, PrintOptions},
-};
 use iceberg_glue_catalog::GlueCatalog;
 
 #[tokio::main]

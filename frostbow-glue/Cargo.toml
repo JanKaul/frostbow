@@ -10,13 +10,13 @@ license = "Apache-2.0"
 [dependencies]
 clap = { workspace = true }
 datafusion = { workspace = true }
-frostbow-cli = { workspace = true }
+datafusion-cli = { workspace = true }
 tokio = { workspace = true }
 object_store = { workspace = true }
 iceberg-rust = { workspace = true }
 datafusion_iceberg = { workspace = true }
-iceberg-glue-catalog = { git = "https://github.com/jankaul/iceberg-rust", version = "0.6", branch = "copy-if-not-exists"   }
+iceberg-glue-catalog = { version = "0.7" }
 async-trait = { workspace = true }
-frostbow = { path = "../frostbow", no-default-features = true }
+frostbow = { path = "../frostbow" }
 openssl.workspace = true
 aws-config = "1.5.10"
