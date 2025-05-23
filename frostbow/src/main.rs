@@ -113,6 +113,43 @@ async fn main_inner() -> Result<(), Error> {
                 configuration,
                 object_store,
             )) as Arc<dyn CatalogList>
+        } else if catalog_url.starts_with("https://s3tables") {
+            let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
+
+            if catalog_url == "https://s3tables" {
+                catalog_url.push_str(&format!(
+                    ".{}.amazonaws.com/iceberg",
+                    &config
+                        .region()
+                        .ok_or(IcebergError::InvalidFormat("Region missing.".to_owned()))?
+                        .to_string(),
+                ));
+            }
+
+            let credentials = config
+                .credentials_provider()
+                .ok_or(IcebergError::NotFound("Region".to_owned()))?
+                .provide_credentials()
+                .await
+                .unwrap();
+
+            let aws_key = AWSv4Key {
+                access_key: credentials.access_key_id().to_owned(),
+                secret_key: SecretString::from_str(credentials.secret_access_key()).unwrap(),
+                region: config
+                    .region()
+                    .ok_or(IcebergError::NotFound("Region".to_owned()))?
+                    .to_string(),
+                service: "glue".to_owned(),
+            };
+
+            let configuration = ConfigurationBuilder::default()
+                .base_path(catalog_url.clone())
+                .aws_v4_key(aws_key)
+                .build()
+                .unwrap();
+
+            Arc::new(RestCatalogList::new(configuration, object_store)) as Arc<dyn CatalogList>
         } else {
             let configuration = ConfigurationBuilder::default()
                 .base_path(catalog_url.clone())
