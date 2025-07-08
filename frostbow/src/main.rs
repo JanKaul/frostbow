@@ -65,7 +65,7 @@ async fn main_inner() -> Result<(), Error> {
                     .map_err(iceberg_rust::error::Error::from)?,
             ) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("arn:") {
-            let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
 
             Arc::new(S3TablesCatalogList::new(
                 &config,
@@ -73,7 +73,7 @@ async fn main_inner() -> Result<(), Error> {
                 object_store,
             )) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("https://glue") {
-            let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
 
             if catalog_url == "https://glue" {
                 catalog_url.push_str(&format!(
@@ -95,6 +95,11 @@ async fn main_inner() -> Result<(), Error> {
             let aws_key = AWSv4Key {
                 access_key: credentials.access_key_id().to_owned(),
                 secret_key: SecretString::from_str(credentials.secret_access_key()).unwrap(),
+                session_token: credentials
+                    .session_token()
+                    .map(SecretString::from_str)
+                    .transpose()
+                    .unwrap(),
                 region: config
                     .region()
                     .ok_or(IcebergError::NotFound("Region".to_owned()))?
@@ -111,10 +116,10 @@ async fn main_inner() -> Result<(), Error> {
             Arc::new(RestNoPrefixCatalogList::new(
                 "iceberg",
                 configuration,
-                object_store,
+                Some(object_store),
             )) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("https://s3tables") {
-            let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
 
             if catalog_url == "https://s3tables" {
                 catalog_url.push_str(&format!(
@@ -136,6 +141,11 @@ async fn main_inner() -> Result<(), Error> {
             let aws_key = AWSv4Key {
                 access_key: credentials.access_key_id().to_owned(),
                 secret_key: SecretString::from_str(credentials.secret_access_key()).unwrap(),
+                session_token: credentials
+                    .session_token()
+                    .map(SecretString::from_str)
+                    .transpose()
+                    .unwrap(),
                 region: config
                     .region()
                     .ok_or(IcebergError::NotFound("Region".to_owned()))?
@@ -149,14 +159,15 @@ async fn main_inner() -> Result<(), Error> {
                 .build()
                 .unwrap();
 
-            Arc::new(RestCatalogList::new(configuration, object_store)) as Arc<dyn CatalogList>
+            Arc::new(RestCatalogList::new(configuration, Some(object_store)))
+                as Arc<dyn CatalogList>
         } else {
             let configuration = ConfigurationBuilder::default()
                 .base_path(catalog_url.clone())
                 .build()
                 .unwrap();
 
-            Arc::new(RestCatalogList::new(configuration, object_store))
+            Arc::new(RestCatalogList::new(configuration, Some(object_store)))
         }
     };
 
@@ -182,18 +193,18 @@ async fn main_inner() -> Result<(), Error> {
         iceberg_catalog_list,
     )));
 
-    let mut ctx = IcebergContext(ctx);
+    let ctx = IcebergContext(ctx);
 
     if !command.is_empty() {
-        exec::exec_from_commands(&mut ctx, command, &mut print_options)
+        exec::exec_from_commands(&ctx, command, &print_options)
             .await
             .unwrap()
     } else if !files.is_empty() {
-        exec::exec_from_files(&mut ctx, files, &mut print_options)
+        exec::exec_from_files(&ctx, files, &print_options)
             .await
             .unwrap();
     } else {
-        exec::exec_from_repl(&mut ctx, &mut print_options)
+        exec::exec_from_repl(&ctx, &mut print_options)
             .await
             .unwrap();
     }

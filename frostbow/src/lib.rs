@@ -89,7 +89,7 @@ impl CliSessionContext for IcebergContext {
 pub async fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Error> {
     match storage {
         Some("s3") => {
-            let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
 
             let mut builder = AmazonS3Builder::new();
             if let Some(region) = config.region() {
@@ -99,8 +99,8 @@ pub async fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Er
                 builder = builder.with_endpoint(endpoint)
             }
 
-            Ok(ObjectStoreBuilder::S3(builder.with_credentials(Arc::new(
-                AwsCredentialProvider::new(&config),
+            Ok(ObjectStoreBuilder::S3(Box::new(builder.with_credentials(
+                Arc::new(AwsCredentialProvider::new(&config)),
             ))))
         }
         Some("gcs") => Ok(ObjectStoreBuilder::gcs()),
@@ -109,8 +109,7 @@ pub async fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Er
         ))),
         None => Ok(ObjectStoreBuilder::Memory(Arc::new(InMemory::new()))),
         Some(x) => Err(Error::InvalidFormat(format!(
-            "Storage {} is not supported.",
-            x
+            "Storage {x} is not supported."
         ))),
     }
 }

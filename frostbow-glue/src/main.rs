@@ -36,7 +36,7 @@ async fn main_inner() -> Result<(), Error> {
 
     let object_store = get_storage(storage.as_deref()).await?;
 
-    let config = aws_config::load_defaults(BehaviorVersion::v2024_03_28()).await;
+    let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
 
     let iceberg_catalog = Arc::new(
         GlueCatalog::new(&config, "glue", object_store)
@@ -71,18 +71,18 @@ async fn main_inner() -> Result<(), Error> {
     //     iceberg_catalog_list,
     // )));
 
-    let mut ctx = IcebergContext(ctx);
+    let ctx = IcebergContext(ctx);
 
     if !command.is_empty() {
-        exec::exec_from_commands(&mut ctx, command, &mut print_options)
+        exec::exec_from_commands(&ctx, command, &print_options)
             .await
             .unwrap()
     } else if !files.is_empty() {
-        exec::exec_from_files(&mut ctx, files, &mut print_options)
+        exec::exec_from_files(&ctx, files, &print_options)
             .await
             .unwrap();
     } else {
-        exec::exec_from_repl(&mut ctx, &mut print_options)
+        exec::exec_from_repl(&ctx, &mut print_options)
             .await
             .unwrap();
     }
