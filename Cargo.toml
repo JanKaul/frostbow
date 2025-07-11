@@ -13,7 +13,7 @@ datafusion = "47.0"
 datafusion-cli = { version = "47" }
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 object_store = { version = "0.12", features = ["aws", "gcp"] }
-iceberg-rust = { version = "0.8" }
-datafusion_iceberg = { version = "0.8" }
+iceberg-rust = { version = "0.8", git = "https://github.com/jankaul/iceberg-rust" }
+datafusion_iceberg = { version = "0.8", git = "https://github.com/jankaul/iceberg-rust" }
 async-trait = "0.1"
 

@@ -18,9 +18,9 @@ datafusion_iceberg = { workspace = true }
 async-trait = { workspace = true }
 reqwest = "0.11"
 reqwest-middleware = "0.2.0"
-iceberg-rest-catalog = {  version = "0.8", optional = true }
-iceberg-file-catalog = {  version = "0.8" }
-iceberg-s3tables-catalog = { version = "0.8" }
+iceberg-rest-catalog = {  version = "0.8", optional = true, git = "https://github.com/jankaul/iceberg-rust"  }
+iceberg-file-catalog = {  version = "0.8", git = "https://github.com/jankaul/iceberg-rust" }
+iceberg-s3tables-catalog = { version = "0.8", git = "https://github.com/jankaul/iceberg-rust" }
 url = "2.5"
 openssl.workspace = true
 aws-config = "1.5.16"
