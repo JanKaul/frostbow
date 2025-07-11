@@ -131,7 +131,6 @@ async fn main_inner() -> Result<(), Error> {
             Arc::new(RestNoPrefixCatalogList::new(
                 "iceberg",
                 configuration,
-                None,
                 Some(object_store),
                 false,
             )) as Arc<dyn CatalogList>
@@ -175,7 +174,7 @@ async fn main_inner() -> Result<(), Error> {
                 .build()
                 .unwrap();
 
-            Arc::new(RestCatalogList::new(configuration, None, Some(object_store), false))
+            Arc::new(RestCatalogList::new(configuration, Some(object_store), false))
                 as Arc<dyn CatalogList>
         } else {
             tracing::info!("Using REST catalog with URL: {}", catalog_url);
@@ -184,7 +183,7 @@ async fn main_inner() -> Result<(), Error> {
                 .build()
                 .unwrap();
 
-            Arc::new(RestCatalogList::new(configuration, None, Some(object_store), false))
+            Arc::new(RestCatalogList::new(configuration, Some(object_store), false))
         }
     };
 
