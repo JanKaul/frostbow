@@ -2232,8 +2232,7 @@ dependencies = [
 [[package]]
 name = "datafusion_iceberg"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6e38736cb2fd8c215a705d76cc051b74ba1fe42a1a5d73f807fd32a209bfc287"
+source = "git+https://github.com/jankaul/iceberg-rust#b582b349f840b10d47a4434680f6e24d38d440a6"
 dependencies = [
  "async-trait",
  "chrono",
@@ -3131,8 +3130,7 @@ dependencies = [
 [[package]]
 name = "iceberg-file-catalog"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "737f45a463131f71e69469b0ffe77a08f30acb8144a95e1b259f8a240c386379"
+source = "git+https://github.com/jankaul/iceberg-rust#b582b349f840b10d47a4434680f6e24d38d440a6"
 dependencies = [
  "async-trait",
  "futures",
@@ -3147,8 +3145,7 @@ dependencies = [
 [[package]]
 name = "iceberg-glue-catalog"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "266d27c0eb3085d584fce242df8a6e083d91a6648346220425c4d81d1e59fa9f"
+source = "git+https://github.com/jankaul/iceberg-rust#b582b349f840b10d47a4434680f6e24d38d440a6"
 dependencies = [
  "async-trait",
  "aws-config",
@@ -3165,8 +3162,7 @@ dependencies = [
 [[package]]
 name = "iceberg-rest-catalog"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "acc5e7408b03a4b26f91188dcf55c9420524d143a8934027750e3518ca69ffec"
+source = "git+https://github.com/jankaul/iceberg-rust#b582b349f840b10d47a4434680f6e24d38d440a6"
 dependencies = [
  "async-trait",
  "aws-sigv4 0.3.1",
@@ -3191,8 +3187,7 @@ dependencies = [
 [[package]]
 name = "iceberg-rust"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0a32c3fea545dcd9a4207c332f4548ae26687e209ffdbcda6a5f29ec7b418813"
+source = "git+https://github.com/jankaul/iceberg-rust#b582b349f840b10d47a4434680f6e24d38d440a6"
 dependencies = [
  "apache-avro 0.18.0",
  "arrow",
@@ -3224,8 +3219,7 @@ dependencies = [
 [[package]]
 name = "iceberg-rust-spec"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0a485518f60891be889acc5dfaeb6886a279b78a8f7edfce91ec52d3e25de3a3"
+source = "git+https://github.com/jankaul/iceberg-rust#b582b349f840b10d47a4434680f6e24d38d440a6"
 dependencies = [
  "apache-avro 0.18.0",
  "arrow-schema",
@@ -3250,8 +3244,7 @@ dependencies = [
 [[package]]
 name = "iceberg-s3tables-catalog"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aa4f97d479b69c153e39564fd6a173ff68d445c7b0b895094846a91369c81589"
+source = "git+https://github.com/jankaul/iceberg-rust#b582b349f840b10d47a4434680f6e24d38d440a6"
 dependencies = [
  "async-trait",
  "aws-config",
@@ -3268,8 +3261,7 @@ dependencies = [
 [[package]]
 name = "iceberg-sql-catalog"
 version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50ba7a5ecee5ad11d858cecc1ddad71118d334936f9d342fd750bc054a31daa6"
+source = "git+https://github.com/jankaul/iceberg-rust#b582b349f840b10d47a4434680f6e24d38d440a6"
 dependencies = [
  "async-trait",
  "futures",
