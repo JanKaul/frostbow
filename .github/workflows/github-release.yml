@@ -47,5 +47,7 @@ jobs:
         uses: houseabsolute/actions-rust-release@v0
         with:
           executable-name: ${{ matrix.binary.name }}
+          release-tag-prefix: "nightly"
           target: ${{ matrix.platform.target }}
-          extra-files: ""
+          extra-files: null
+          changes-file: null
