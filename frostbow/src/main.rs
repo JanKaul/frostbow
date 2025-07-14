@@ -30,14 +30,23 @@ use iceberg_rust::{catalog::CatalogList, error::Error as IcebergError};
 use iceberg_rest_catalog::catalog::RestCatalogList;
 use iceberg_s3tables_catalog::S3TablesCatalogList;
 use secrecy::SecretString;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[cfg(not(feature = "rest"))]
 compile_error!("feature \"rest\" must be enabled for cli");
 
 #[tokio::main]
 async fn main() -> ExitCode {
+    tracing_subscriber::registry()
+        .with(
+            tracing_subscriber::EnvFilter::try_from_default_env()
+                .unwrap_or_else(|_| "frostbow=info".into()),
+        )
+        .with(tracing_subscriber::fmt::layer())
+        .init();
+
     if let Err(e) = main_inner().await {
-        println!("Error: {e}");
+        tracing::error!("Error: {e}");
         return ExitCode::FAILURE;
     }
     ExitCode::SUCCESS
@@ -54,17 +63,20 @@ async fn main_inner() -> Result<(), Error> {
     let command = args.command;
     let files = args.file;
 
+    tracing::info!("Initializing storage with provider: {:?}", storage);
     let object_store = get_storage(storage.as_deref()).await?;
 
     #[cfg(feature = "rest")]
     let iceberg_catalog_list = {
         if catalog_url.starts_with("s3://") {
+            tracing::info!("Using file catalog with URL: {}", catalog_url);
             Arc::new(
                 FileCatalogList::new(&catalog_url, object_store)
                     .await
                     .map_err(iceberg_rust::error::Error::from)?,
             ) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("arn:") {
+            tracing::info!("Using S3 tables catalog with ARN: {}", catalog_url);
             let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
 
             Arc::new(S3TablesCatalogList::new(
@@ -73,6 +85,7 @@ async fn main_inner() -> Result<(), Error> {
                 object_store,
             )) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("https://glue") {
+            tracing::info!("Using Glue catalog with URL: {}", catalog_url);
             let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
 
             if catalog_url == "https://glue" {
@@ -119,6 +132,7 @@ async fn main_inner() -> Result<(), Error> {
                 Some(object_store),
             )) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("https://s3tables") {
+            tracing::info!("Using S3 tables REST catalog with URL: {}", catalog_url);
             let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
 
             if catalog_url == "https://s3tables" {
@@ -162,6 +176,7 @@ async fn main_inner() -> Result<(), Error> {
             Arc::new(RestCatalogList::new(configuration, Some(object_store)))
                 as Arc<dyn CatalogList>
         } else {
+            tracing::info!("Using REST catalog with URL: {}", catalog_url);
             let configuration = ConfigurationBuilder::default()
                 .base_path(catalog_url.clone())
                 .build()
@@ -173,6 +188,7 @@ async fn main_inner() -> Result<(), Error> {
 
     let catalog_list = Arc::new(IcebergCatalogList::new(iceberg_catalog_list.clone()).await?);
 
+    tracing::info!("Initializing DataFusion session");
     let state = SessionStateBuilder::new()
         .with_default_features()
         .with_config(SessionConfig::default().with_information_schema(true))
@@ -196,14 +212,17 @@ async fn main_inner() -> Result<(), Error> {
     let ctx = IcebergContext(ctx);
 
     if !command.is_empty() {
+        tracing::info!("Executing command: {:?}", command);
         exec::exec_from_commands(&ctx, command, &print_options)
             .await
             .unwrap()
     } else if !files.is_empty() {
+        tracing::info!("Executing files: {:?}", files);
         exec::exec_from_files(&ctx, files, &print_options)
             .await
             .unwrap();
     } else {
+        tracing::info!("Starting REPL");
         exec::exec_from_repl(&ctx, &mut print_options)
             .await
             .unwrap();

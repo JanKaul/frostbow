@@ -27,6 +27,8 @@ aws-config = "1.5.16"
 aws-credential-types = "1.2.1"
 futures = "0.3.31"
 secrecy = "0.8"
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
 
 [features]
 default = ["rest"]

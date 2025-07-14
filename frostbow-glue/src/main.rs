@@ -17,11 +17,20 @@ use datafusion_iceberg::{
 };
 use frostbow::{get_storage, Args, IcebergContext};
 use iceberg_glue_catalog::GlueCatalog;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[tokio::main]
 async fn main() -> ExitCode {
+    tracing_subscriber::registry()
+        .with(
+            tracing_subscriber::EnvFilter::try_from_default_env()
+                .unwrap_or_else(|_| "frostbow_glue=info".into()),
+        )
+        .with(tracing_subscriber::fmt::layer())
+        .init();
+
     if let Err(e) = main_inner().await {
-        println!("Error: {e}");
+        tracing::error!("Error: {e}");
         return ExitCode::FAILURE;
     }
     ExitCode::SUCCESS
@@ -34,10 +43,13 @@ async fn main_inner() -> Result<(), Error> {
     let command = args.command;
     let files = args.file;
 
+    tracing::info!("Initializing storage with provider: {:?}", storage);
     let object_store = get_storage(storage.as_deref()).await?;
 
+    tracing::info!("Loading AWS configuration");
     let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
 
+    tracing::info!("Initializing Glue catalog");
     let iceberg_catalog = Arc::new(
         GlueCatalog::new(&config, "glue", object_store)
             .map_err(iceberg_rust::error::Error::from)?,
@@ -51,6 +63,7 @@ async fn main_inner() -> Result<(), Error> {
         .catalogs
         .insert("glue".to_owned(), catalog);
 
+    tracing::info!("Initializing DataFusion session");
     let state = SessionStateBuilder::new()
         .with_default_features()
         .with_config(SessionConfig::default().with_information_schema(true))
@@ -74,14 +87,17 @@ async fn main_inner() -> Result<(), Error> {
     let ctx = IcebergContext(ctx);
 
     if !command.is_empty() {
+        tracing::info!("Executing command: {:?}", command);
         exec::exec_from_commands(&ctx, command, &print_options)
             .await
             .unwrap()
     } else if !files.is_empty() {
+        tracing::info!("Executing files: {:?}", files);
         exec::exec_from_files(&ctx, files, &print_options)
             .await
             .unwrap();
     } else {
+        tracing::info!("Starting REPL");
         exec::exec_from_repl(&ctx, &mut print_options)
             .await
             .unwrap();
