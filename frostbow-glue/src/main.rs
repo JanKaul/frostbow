@@ -74,7 +74,7 @@ async fn main_inner() -> Result<(), Error> {
     let mut print_options = PrintOptions {
         format: PrintFormat::Automatic,
         quiet: true,
-        maxrows: MaxRows::Unlimited,
+        maxrows: MaxRows::Limited(10000),
         color: true,
     };
 
