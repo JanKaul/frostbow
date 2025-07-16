@@ -2,7 +2,10 @@ use std::{process::ExitCode, sync::Arc};
 
 use clap::Parser;
 use datafusion::{
-    execution::{context::SessionContext, SessionStateBuilder},
+    execution::{
+        context::SessionContext, memory_pool::GreedyMemoryPool, runtime_env::RuntimeEnvBuilder,
+        SessionStateBuilder,
+    },
     logical_expr::ScalarUDF,
     prelude::SessionConfig,
 };
@@ -16,7 +19,7 @@ use datafusion_iceberg::{
     error::Error,
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
-use frostbow::{get_storage, Args, IcebergContext};
+use frostbow::{get_storage, Args, IcebergContext, BYTES_IN_GIBIBYTE};
 use iceberg_rust::error::Error as IcebergError;
 
 use iceberg_sql_catalog::SqlCatalogList;
@@ -64,10 +67,20 @@ async fn main_inner() -> Result<(), Error> {
 
     let catalog_list = Arc::new(IcebergCatalogList::new(iceberg_catalog_list.clone()).await?);
 
+    let runtime_env_builder = RuntimeEnvBuilder::new();
+    let runtime_env_builder = if let Some(limit) = args.memory {
+        runtime_env_builder
+            .with_memory_pool(Arc::new(GreedyMemoryPool::new(limit * BYTES_IN_GIBIBYTE)))
+    } else {
+        runtime_env_builder
+    };
+    let runtime_env = Arc::new(runtime_env_builder.build()?);
+
     tracing::info!("Initializing DataFusion session");
     let state = SessionStateBuilder::new()
         .with_default_features()
         .with_config(SessionConfig::default().with_information_schema(true))
+        .with_runtime_env(runtime_env)
         .with_catalog_list(catalog_list)
         .with_query_planner(Arc::new(IcebergQueryPlanner::new()))
         .build();

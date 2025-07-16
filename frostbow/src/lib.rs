@@ -24,6 +24,8 @@ use object_store::{aws::AmazonS3Builder, local::LocalFileSystem, memory::InMemor
 
 pub mod credentials;
 
+pub static BYTES_IN_GIBIBYTE: usize = 1_074_000_000;
+
 #[derive(Debug, Parser)]
 #[clap(version, about)]
 pub struct Args {
@@ -39,6 +41,8 @@ pub struct Args {
     pub command: Vec<String>,
     #[clap(short = 'f', long, help = "Execute the given files.")]
     pub file: Vec<String>,
+    #[clap(short = 'm', long, help = "Memory pool size in GB.")]
+    pub memory: Option<usize>,
 }
 
 pub struct IcebergContext(pub SessionContext);

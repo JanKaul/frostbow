@@ -4,7 +4,10 @@ use aws_config::BehaviorVersion;
 use clap::Parser;
 use datafusion::{
     catalog::MemoryCatalogProviderList,
-    execution::{context::SessionContext, SessionStateBuilder},
+    execution::{
+        context::SessionContext, memory_pool::GreedyMemoryPool, runtime_env::RuntimeEnvBuilder,
+        SessionStateBuilder,
+    },
     prelude::SessionConfig,
 };
 use datafusion_cli::{
@@ -15,7 +18,7 @@ use datafusion_cli::{
 use datafusion_iceberg::{
     catalog::catalog::IcebergCatalog, error::Error, planner::IcebergQueryPlanner,
 };
-use frostbow::{get_storage, Args, IcebergContext};
+use frostbow::{get_storage, Args, IcebergContext, BYTES_IN_GIBIBYTE};
 use iceberg_glue_catalog::GlueCatalog;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
@@ -63,10 +66,20 @@ async fn main_inner() -> Result<(), Error> {
         .catalogs
         .insert("glue".to_owned(), catalog);
 
+    let runtime_env_builder = RuntimeEnvBuilder::new();
+    let runtime_env_builder = if let Some(limit) = args.memory {
+        runtime_env_builder
+            .with_memory_pool(Arc::new(GreedyMemoryPool::new(limit * BYTES_IN_GIBIBYTE)))
+    } else {
+        runtime_env_builder
+    };
+    let runtime_env = Arc::new(runtime_env_builder.build()?);
+
     tracing::info!("Initializing DataFusion session");
     let state = SessionStateBuilder::new()
         .with_default_features()
         .with_config(SessionConfig::default().with_information_schema(true))
+        .with_runtime_env(runtime_env)
         .with_catalog_list(iceberg_catalog_list)
         .with_query_planner(Arc::new(IcebergQueryPlanner::new()))
         .build();
