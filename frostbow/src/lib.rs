@@ -93,7 +93,7 @@ impl CliSessionContext for IcebergContext {
 pub async fn get_storage(storage: Option<&str>) -> Result<ObjectStoreBuilder, Error> {
     match storage {
         Some("s3") => {
-            let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2025_08_07()).await;
 
             let mut builder = AmazonS3Builder::from_env();
             if let Some(region) = config.region() {

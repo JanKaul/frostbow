@@ -50,7 +50,7 @@ async fn main_inner() -> Result<(), Error> {
     let object_store = get_storage(storage.as_deref()).await?;
 
     tracing::info!("Loading AWS configuration");
-    let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
+    let config = aws_config::load_defaults(BehaviorVersion::v2025_08_07()).await;
 
     tracing::info!("Initializing Glue catalog");
     let iceberg_catalog = Arc::new(

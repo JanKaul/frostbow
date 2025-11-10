@@ -80,7 +80,7 @@ async fn main_inner() -> Result<(), Error> {
             ) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("arn:") {
             tracing::info!("Using S3 tables catalog with ARN: {}", catalog_url);
-            let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2025_08_07()).await;
 
             Arc::new(S3TablesCatalogList::new(
                 &config,
@@ -89,7 +89,7 @@ async fn main_inner() -> Result<(), Error> {
             )) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("https://glue") {
             tracing::info!("Using Glue catalog with URL: {}", catalog_url);
-            let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2025_08_07()).await;
 
             if catalog_url == "https://glue" {
                 catalog_url.push_str(&format!(
@@ -136,7 +136,7 @@ async fn main_inner() -> Result<(), Error> {
             )) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("https://s3tables") {
             tracing::info!("Using S3 tables REST catalog with URL: {}", catalog_url);
-            let config = aws_config::load_defaults(BehaviorVersion::v2025_01_17()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2025_08_07()).await;
 
             if catalog_url == "https://s3tables" {
                 catalog_url.push_str(&format!(
