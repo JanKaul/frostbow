@@ -17,7 +17,7 @@ iceberg-rust = { workspace = true }
 datafusion_iceberg = { workspace = true }
 iceberg-glue-catalog = { version = "0.9" }
 async-trait = { workspace = true }
-frostbow = { path = "../frostbow" }
+frostbow = { path = "../frostbow", version = "0.4.0" }
 openssl.workspace = true
 aws-config = "1.5.10"
 tracing = { workspace = true }
