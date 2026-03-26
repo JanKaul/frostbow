@@ -1,4 +1,4 @@
-use std::{process::ExitCode, str::FromStr, sync::Arc};
+use std::{process::ExitCode, sync::Arc};
 
 use aws_config::BehaviorVersion;
 use aws_credential_types::provider::ProvideCredentials;
@@ -13,6 +13,7 @@ use datafusion::{
 };
 use datafusion_cli::{
     exec,
+    object_storage::instrumented::InstrumentedObjectStoreRegistry,
     print_format::PrintFormat,
     print_options::{MaxRows, PrintOptions},
 };
@@ -80,7 +81,7 @@ async fn main_inner() -> Result<(), Error> {
             ) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("arn:") {
             tracing::info!("Using S3 tables catalog with ARN: {}", catalog_url);
-            let config = aws_config::load_defaults(BehaviorVersion::v2025_08_07()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2026_01_12()).await;
 
             Arc::new(S3TablesCatalogList::new(
                 &config,
@@ -89,7 +90,7 @@ async fn main_inner() -> Result<(), Error> {
             )) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("https://glue") {
             tracing::info!("Using Glue catalog with URL: {}", catalog_url);
-            let config = aws_config::load_defaults(BehaviorVersion::v2025_08_07()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2026_01_12()).await;
 
             if catalog_url == "https://glue" {
                 catalog_url.push_str(&format!(
@@ -110,12 +111,10 @@ async fn main_inner() -> Result<(), Error> {
 
             let aws_key = AWSv4Key {
                 access_key: credentials.access_key_id().to_owned(),
-                secret_key: SecretString::from_str(credentials.secret_access_key()).unwrap(),
+                secret_key: SecretString::from(credentials.secret_access_key()),
                 session_token: credentials
                     .session_token()
-                    .map(SecretString::from_str)
-                    .transpose()
-                    .unwrap(),
+                    .map(SecretString::from),
                 region: config
                     .region()
                     .ok_or(IcebergError::NotFound("Region".to_owned()))?
@@ -132,11 +131,13 @@ async fn main_inner() -> Result<(), Error> {
             Arc::new(RestNoPrefixCatalogList::new(
                 "iceberg",
                 configuration,
+                None,
                 Some(object_store),
+                false,
             )) as Arc<dyn CatalogList>
         } else if catalog_url.starts_with("https://s3tables") {
             tracing::info!("Using S3 tables REST catalog with URL: {}", catalog_url);
-            let config = aws_config::load_defaults(BehaviorVersion::v2025_08_07()).await;
+            let config = aws_config::load_defaults(BehaviorVersion::v2026_01_12()).await;
 
             if catalog_url == "https://s3tables" {
                 catalog_url.push_str(&format!(
@@ -157,12 +158,10 @@ async fn main_inner() -> Result<(), Error> {
 
             let aws_key = AWSv4Key {
                 access_key: credentials.access_key_id().to_owned(),
-                secret_key: SecretString::from_str(credentials.secret_access_key()).unwrap(),
+                secret_key: SecretString::from(credentials.secret_access_key()),
                 session_token: credentials
                     .session_token()
-                    .map(SecretString::from_str)
-                    .transpose()
-                    .unwrap(),
+                    .map(SecretString::from),
                 region: config
                     .region()
                     .ok_or(IcebergError::NotFound("Region".to_owned()))?
@@ -176,7 +175,7 @@ async fn main_inner() -> Result<(), Error> {
                 .build()
                 .unwrap();
 
-            Arc::new(RestCatalogList::new(configuration, Some(object_store)))
+            Arc::new(RestCatalogList::new(configuration, None, Some(object_store), false))
                 as Arc<dyn CatalogList>
         } else {
             tracing::info!("Using REST catalog with URL: {}", catalog_url);
@@ -185,7 +184,7 @@ async fn main_inner() -> Result<(), Error> {
                 .build()
                 .unwrap();
 
-            Arc::new(RestCatalogList::new(configuration, Some(object_store)))
+            Arc::new(RestCatalogList::new(configuration, None, Some(object_store), false))
         }
     };
 
@@ -214,6 +213,7 @@ async fn main_inner() -> Result<(), Error> {
         quiet: true,
         maxrows: MaxRows::Limited(10000),
         color: true,
+        instrumented_registry: Arc::new(InstrumentedObjectStoreRegistry::new()),
     };
 
     let ctx = SessionContext::new_with_state(state);

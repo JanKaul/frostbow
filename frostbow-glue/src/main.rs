@@ -12,6 +12,7 @@ use datafusion::{
 };
 use datafusion_cli::{
     exec,
+    object_storage::instrumented::InstrumentedObjectStoreRegistry,
     print_format::PrintFormat,
     print_options::{MaxRows, PrintOptions},
 };
@@ -50,7 +51,7 @@ async fn main_inner() -> Result<(), Error> {
     let object_store = get_storage(storage.as_deref()).await?;
 
     tracing::info!("Loading AWS configuration");
-    let config = aws_config::load_defaults(BehaviorVersion::v2025_08_07()).await;
+    let config = aws_config::load_defaults(BehaviorVersion::v2026_01_12()).await;
 
     tracing::info!("Initializing Glue catalog");
     let iceberg_catalog = Arc::new(
@@ -89,6 +90,7 @@ async fn main_inner() -> Result<(), Error> {
         quiet: true,
         maxrows: MaxRows::Limited(10000),
         color: true,
+        instrumented_registry: Arc::new(InstrumentedObjectStoreRegistry::new()),
     };
 
     let ctx = SessionContext::new_with_state(state);

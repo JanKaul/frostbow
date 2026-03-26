@@ -32,7 +32,10 @@ impl CredentialProvider for AwsCredentialProvider {
             let provider = self
                 .config
                 .credentials_provider()
-                .ok_or(ObjectStoreError::NotImplemented)?;
+                .ok_or(ObjectStoreError::NotImplemented {
+                    operation: "credentials_provider".to_string(),
+                    implementer: "AwsCredentialProvider".to_string(),
+                })?;
 
             let credentials =
                 provider

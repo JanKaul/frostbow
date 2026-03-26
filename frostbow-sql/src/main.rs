@@ -11,6 +11,7 @@ use datafusion::{
 };
 use datafusion_cli::{
     exec,
+    object_storage::instrumented::InstrumentedObjectStoreRegistry,
     print_format::PrintFormat,
     print_options::{MaxRows, PrintOptions},
 };
@@ -90,6 +91,7 @@ async fn main_inner() -> Result<(), Error> {
         quiet: true,
         maxrows: MaxRows::Limited(10000),
         color: true,
+        instrumented_registry: Arc::new(InstrumentedObjectStoreRegistry::new()),
     };
 
     let ctx = SessionContext::new_with_state(state);
