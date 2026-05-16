@@ -175,8 +175,9 @@ checksum = "7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50"
 
 [[package]]
 name = "arrow"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "378530e55cd479eda3c14eb345310799717e6f76d0c332041e8487022166b471"
 dependencies = [
  "arrow-arith",
  "arrow-array",
@@ -195,8 +196,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-arith"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a0ab212d2c1886e802f51c5212d78ebbcbb0bec980fff9dadc1eb8d45cd0b738"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -208,8 +210,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-array"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cfd33d3e92f207444098c75b42de99d329562be0cf686b307b097cc52b4e999e"
 dependencies = [
  "ahash 0.8.12",
  "arrow-buffer",
@@ -226,8 +229,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-avro"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "049230728cd6e093088c8d231b4beede184e35cad7777c1505c0d5a8571f4376"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -249,8 +253,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-buffer"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0c6cd424c2693bcdbc150d843dc9d4d137dd2de4782ce6df491ad11a3a0416c0"
 dependencies = [
  "bytes",
  "half",
@@ -260,8 +265,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-cast"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c5aefb56a2c02e9e2b30746241058b85f8983f0fcff2ba0c6d09006e1cded7f"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -281,8 +287,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-csv"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e94e8cf7e517657a52b91ea1263acf38c4ca62a84655d72458a3359b12ab97de"
 dependencies = [
  "arrow-array",
  "arrow-cast",
@@ -295,8 +302,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-data"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3c88210023a2bfee1896af366309a3028fc3bcbd6515fa29a7990ee1baa08ee0"
 dependencies = [
  "arrow-buffer",
  "arrow-schema",
@@ -307,8 +315,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-ipc"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "238438f0834483703d88896db6fe5a7138b2230debc31b34c0336c2996e3c64f"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -322,8 +331,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-json"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "205ca2119e6d679d5c133c6f30e68f027738d95ed948cf77677ea69c7800036b"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -346,8 +356,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-ord"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1bffd8fd2579286a5d63bac898159873e5094a79009940bcb42bbfce4f19f1d0"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -358,8 +369,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-row"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bab5994731204603c73ba69267616c50f80780774c6bb0476f1f830625115e0c"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -370,8 +382,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-schema"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f633dbfdf39c039ada1bf9e34c694816eb71fbb7dc78f613993b7245e078a1ed"
 dependencies = [
  "serde_core",
  "serde_json",
@@ -379,8 +392,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-select"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8cd065c54172ac787cf3f2f8d4107e0d3fdc26edba76fdf4f4cc170258942222"
 dependencies = [
  "ahash 0.8.12",
  "arrow-array",
@@ -392,8 +406,9 @@ dependencies = [
 
 [[package]]
 name = "arrow-string"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "29dd7cda3ab9692f43a2e4acc444d760cc17b12bb6d8232ddf64e9bab7c06b42"
 dependencies = [
  "arrow-array",
  "arrow-buffer",
@@ -1561,7 +1576,7 @@ dependencies = [
 [[package]]
 name = "datafusion"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "arrow-schema",
@@ -1603,7 +1618,7 @@ dependencies = [
  "object_store",
  "parking_lot",
  "parquet",
- "sqlparser",
+ "sqlparser 0.62.0",
  "tempfile",
  "tokio",
  "url",
@@ -1614,7 +1629,7 @@ dependencies = [
 [[package]]
 name = "datafusion-catalog"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1638,7 +1653,7 @@ dependencies = [
 [[package]]
 name = "datafusion-catalog-listing"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1660,7 +1675,7 @@ dependencies = [
 [[package]]
 name = "datafusion-cli"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1687,7 +1702,7 @@ dependencies = [
 [[package]]
 name = "datafusion-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "arrow-ipc",
@@ -1704,7 +1719,7 @@ dependencies = [
  "object_store",
  "parquet",
  "recursive",
- "sqlparser",
+ "sqlparser 0.62.0",
  "tokio",
  "uuid",
  "web-time",
@@ -1713,7 +1728,7 @@ dependencies = [
 [[package]]
 name = "datafusion-common-runtime"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "futures",
  "log",
@@ -1723,7 +1738,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "async-compression",
@@ -1758,7 +1773,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-arrow"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "arrow-ipc",
@@ -1781,7 +1796,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-avro"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "arrow-avro",
@@ -1799,7 +1814,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-csv"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1821,7 +1836,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-json"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1843,7 +1858,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-parquet"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1873,12 +1888,12 @@ dependencies = [
 [[package]]
 name = "datafusion-doc"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 
 [[package]]
 name = "datafusion-execution"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "arrow-buffer",
@@ -1894,13 +1909,14 @@ dependencies = [
  "parquet",
  "rand 0.9.4",
  "tempfile",
+ "tokio",
  "url",
 ]
 
 [[package]]
 name = "datafusion-expr"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "arrow-schema",
@@ -1916,13 +1932,13 @@ dependencies = [
  "itertools",
  "recursive",
  "serde_json",
- "sqlparser",
+ "sqlparser 0.62.0",
 ]
 
 [[package]]
 name = "datafusion-expr-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -1933,7 +1949,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "arrow-buffer",
@@ -1964,7 +1980,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-aggregate"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -1984,7 +2000,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-aggregate-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -1995,7 +2011,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-nested"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "arrow-ord",
@@ -2019,7 +2035,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-table"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "async-trait",
@@ -2033,7 +2049,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-window"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2049,7 +2065,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-window-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "datafusion-common",
  "datafusion-physical-expr-common",
@@ -2058,7 +2074,7 @@ dependencies = [
 [[package]]
 name = "datafusion-macros"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "datafusion-doc",
  "quote",
@@ -2068,7 +2084,7 @@ dependencies = [
 [[package]]
 name = "datafusion-optimizer"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "chrono",
@@ -2087,7 +2103,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-expr"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2108,7 +2124,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-expr-adapter"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2122,7 +2138,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-expr-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "chrono",
@@ -2138,7 +2154,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-optimizer"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2156,7 +2172,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-plan"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "arrow-data",
@@ -2188,7 +2204,7 @@ dependencies = [
 [[package]]
 name = "datafusion-pruning"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2203,7 +2219,7 @@ dependencies = [
 [[package]]
 name = "datafusion-session"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "async-trait",
  "datafusion-common",
@@ -2216,7 +2232,7 @@ dependencies = [
 [[package]]
 name = "datafusion-sql"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reclaimer-join-reorder#56a2a7cf8dba351786bc2fee88b22041c49e2ae9"
 dependencies = [
  "arrow",
  "bigdecimal",
@@ -2228,7 +2244,7 @@ dependencies = [
  "log",
  "recursive",
  "regex",
- "sqlparser",
+ "sqlparser 0.62.0",
 ]
 
 [[package]]
@@ -3244,7 +3260,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "smallvec",
- "sqlparser",
+ "sqlparser 0.61.0",
  "thiserror 2.0.18",
  "thrift",
  "tokio",
@@ -3602,9 +3618,9 @@ dependencies = [
 
 [[package]]
 name = "libbz2-rs-sys"
-version = "0.2.4"
+version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f8fc329e1457d97a9d58a4e2ca49e3be572431a7e096008efc2e3a3c19d428f4"
+checksum = "34b357333733e8260735ba5894eb928c02ecc69c78715f01a8019e7fa7f2db4c"
 
 [[package]]
 name = "libc"
@@ -4104,16 +4120,15 @@ dependencies = [
 
 [[package]]
 name = "parquet"
-version = "58.2.0"
-source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+version = "58.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5dafa7d01085b62a47dd0c1829550a0a36710ea9c4fe358a05a85477cec8a908"
 dependencies = [
  "ahash 0.8.12",
- "arrow-arith",
  "arrow-array",
  "arrow-buffer",
  "arrow-data",
  "arrow-ipc",
- "arrow-ord",
  "arrow-schema",
  "arrow-select",
  "base64 0.22.1",
@@ -5307,6 +5322,17 @@ name = "sqlparser"
 version = "0.61.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dbf5ea8d4d7c808e1af1cbabebca9a2abe603bcefc22294c5b95018d53200cb7"
+dependencies = [
+ "log",
+ "recursive",
+ "sqlparser_derive",
+]
+
+[[package]]
+name = "sqlparser"
+version = "0.62.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "13c6d1b651dc4edf07eead2a0c6c78016ce971bc2c10da5266861b13f25e7cec"
 dependencies = [
  "log",
  "recursive",
@@ -6936,3 +6962,83 @@ dependencies = [
  "cc",
  "pkg-config",
 ]
+
+[[patch.unused]]
+name = "arrow"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-arith"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-array"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-avro"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-buffer"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-cast"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-csv"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-data"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-ipc"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-json"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-ord"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-row"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-schema"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-select"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "arrow-string"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
+
+[[patch.unused]]
+name = "parquet"
+version = "58.2.0"
+source = "git+https://github.com/Embucket/arrow-rs.git?branch=hll-v58.2.0#4e4e6b3e1635dc277fd0f6c9e04f653526d0bbe1"
