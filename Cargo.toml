@@ -13,9 +13,60 @@ datafusion = "53"
 datafusion-cli = { version = "53" }
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 object_store = { version = "0.13", features = ["aws", "gcp"] }
-iceberg-rust = { version = "0.10", git = "https://github.com/jankaul/iceberg-rust" }
-datafusion_iceberg = { version = "0.10", git = "https://github.com/jankaul/iceberg-rust" }
+iceberg-rust = { git = "https://github.com/Embucket/iceberg-rust.git", branch = "nightly" }
+datafusion_iceberg = { git = "https://github.com/Embucket/iceberg-rust.git", branch = "nightly" }
 async-trait = "0.1"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[patch.crates-io]
+arrow         = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-arith   = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-avro    = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-array   = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-buffer  = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-cast    = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-csv     = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-data    = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-ipc     = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-json    = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-ord     = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-row     = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-schema  = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-select  = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+arrow-string  = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+parquet       = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
+
+# DataFusion — Embucket join-reordering branch (datafusion 53.1.0).
+datafusion                            = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-catalog                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-catalog-listing            = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-cli                        = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-common                     = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-common-runtime             = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-datasource                 = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-datasource-arrow           = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-datasource-avro            = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-datasource-csv             = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-datasource-json            = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-datasource-parquet         = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-execution                  = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-expr                       = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-expr-common                = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-functions                  = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-functions-aggregate        = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-functions-aggregate-common = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-functions-nested           = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-functions-table            = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-functions-window           = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-functions-window-common    = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-optimizer                  = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-physical-expr              = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-physical-expr-adapter      = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-physical-expr-common       = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-physical-optimizer         = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-physical-plan              = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-pruning                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-session                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
+datafusion-sql                        = { git = "https://github.com/Embucket/datafusion.git", branch = "reorder_join" }
 

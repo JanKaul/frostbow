@@ -15,7 +15,7 @@ tokio = { workspace = true }
 object_store = { workspace = true }
 iceberg-rust = { workspace = true }
 datafusion_iceberg = { workspace = true }
-iceberg-glue-catalog = { version = "0.10", git = "https://github.com/jankaul/iceberg-rust" }
+iceberg-glue-catalog = { git = "https://github.com/Embucket/iceberg-rust.git", branch = "nightly" }
 async-trait = { workspace = true }
 frostbow = { path = "../frostbow", version = "0.4.0" }
 openssl.workspace = true
