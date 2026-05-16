@@ -1561,7 +1561,7 @@ dependencies = [
 [[package]]
 name = "datafusion"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "arrow-schema",
@@ -1614,7 +1614,7 @@ dependencies = [
 [[package]]
 name = "datafusion-catalog"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1638,7 +1638,7 @@ dependencies = [
 [[package]]
 name = "datafusion-catalog-listing"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1660,7 +1660,7 @@ dependencies = [
 [[package]]
 name = "datafusion-cli"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1687,7 +1687,7 @@ dependencies = [
 [[package]]
 name = "datafusion-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "arrow-ipc",
@@ -1713,7 +1713,7 @@ dependencies = [
 [[package]]
 name = "datafusion-common-runtime"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "futures",
  "log",
@@ -1723,7 +1723,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "async-compression",
@@ -1758,7 +1758,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-arrow"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "arrow-ipc",
@@ -1781,7 +1781,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-avro"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "arrow-avro",
@@ -1799,7 +1799,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-csv"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1821,7 +1821,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-json"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1843,7 +1843,7 @@ dependencies = [
 [[package]]
 name = "datafusion-datasource-parquet"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "async-trait",
@@ -1873,12 +1873,12 @@ dependencies = [
 [[package]]
 name = "datafusion-doc"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 
 [[package]]
 name = "datafusion-execution"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "arrow-buffer",
@@ -1900,7 +1900,7 @@ dependencies = [
 [[package]]
 name = "datafusion-expr"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "arrow-schema",
@@ -1922,7 +1922,7 @@ dependencies = [
 [[package]]
 name = "datafusion-expr-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -1933,7 +1933,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "arrow-buffer",
@@ -1964,7 +1964,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-aggregate"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -1984,7 +1984,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-aggregate-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -1995,7 +1995,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-nested"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "arrow-ord",
@@ -2019,7 +2019,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-table"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "async-trait",
@@ -2033,7 +2033,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-window"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2049,7 +2049,7 @@ dependencies = [
 [[package]]
 name = "datafusion-functions-window-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "datafusion-common",
  "datafusion-physical-expr-common",
@@ -2058,7 +2058,7 @@ dependencies = [
 [[package]]
 name = "datafusion-macros"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "datafusion-doc",
  "quote",
@@ -2068,7 +2068,7 @@ dependencies = [
 [[package]]
 name = "datafusion-optimizer"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "chrono",
@@ -2087,7 +2087,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-expr"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2108,7 +2108,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-expr-adapter"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2122,7 +2122,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-expr-common"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "chrono",
@@ -2138,7 +2138,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-optimizer"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2156,7 +2156,7 @@ dependencies = [
 [[package]]
 name = "datafusion-physical-plan"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "arrow-data",
@@ -2188,7 +2188,7 @@ dependencies = [
 [[package]]
 name = "datafusion-pruning"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "datafusion-common",
@@ -2203,7 +2203,7 @@ dependencies = [
 [[package]]
 name = "datafusion-session"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "async-trait",
  "datafusion-common",
@@ -2216,7 +2216,7 @@ dependencies = [
 [[package]]
 name = "datafusion-sql"
 version = "53.1.0"
-source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#4043d86d0ba79334b355d8a39137bbd3766d01f1"
+source = "git+https://github.com/Embucket/datafusion.git?branch=reorder_join#fcbfce42e69157f16cea449562534cfb66e3180d"
 dependencies = [
  "arrow",
  "bigdecimal",
