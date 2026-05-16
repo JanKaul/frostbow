@@ -201,7 +201,7 @@ async fn main_inner() -> Result<(), Error> {
     tracing::info!("Initializing DataFusion session");
     let state = SessionStateBuilder::new()
         .with_default_features()
-        .with_config(SessionConfig::default().with_information_schema(true))
+        .with_config(SessionConfig::from_env()?.with_information_schema(true))
         .with_runtime_env(runtime_env)
         .with_catalog_list(catalog_list)
         .with_query_planner(Arc::new(IcebergQueryPlanner::new()))
