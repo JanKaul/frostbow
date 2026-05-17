@@ -14,6 +14,9 @@ use datafusion::{
         TaskContext,
     },
     logical_expr::LogicalPlan,
+    optimizer::reorder_join::{
+        cost::DefaultCostEstimator, left_deep_join_plan::optimal_left_deep_join_plan,
+    },
 };
 use datafusion_cli::{
     cli_context::CliSessionContext,
@@ -86,6 +89,7 @@ impl CliSessionContext for IcebergContext {
 
     async fn execute_logical_plan(&self, plan: LogicalPlan) -> Result<DataFrame, DataFusionError> {
         let plan = plan.transform(iceberg_transform).data()?;
+        let plan = optimal_left_deep_join_plan(plan, &DefaultCostEstimator {})?;
         self.0.execute_logical_plan(plan).await
     }
 }
