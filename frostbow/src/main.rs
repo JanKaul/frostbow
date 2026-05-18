@@ -22,7 +22,7 @@ use datafusion_iceberg::{
     error::Error,
     planner::{IcebergQueryPlanner, RefreshMaterializedView},
 };
-use frostbow::{get_storage, Args, IcebergContext, BYTES_IN_GIBIBYTE};
+use frostbow::{get_storage, register_reorder_join, Args, IcebergContext, BYTES_IN_GIBIBYTE};
 use iceberg_file_catalog::FileCatalogList;
 use iceberg_rest_catalog::{
     apis::configuration::{AWSv4Key, ConfigurationBuilder},
@@ -199,13 +199,13 @@ async fn main_inner() -> Result<(), Error> {
     let runtime_env = Arc::new(runtime_env_builder.build()?);
 
     tracing::info!("Initializing DataFusion session");
-    let state = SessionStateBuilder::new()
+    let builder = SessionStateBuilder::new()
         .with_default_features()
         .with_config(SessionConfig::from_env()?.with_information_schema(true))
         .with_runtime_env(runtime_env)
         .with_catalog_list(catalog_list)
-        .with_query_planner(Arc::new(IcebergQueryPlanner::new()))
-        .build();
+        .with_query_planner(Arc::new(IcebergQueryPlanner::new()));
+    let state = register_reorder_join(builder).build();
 
     let mut print_options = PrintOptions {
         format: PrintFormat::Automatic,
