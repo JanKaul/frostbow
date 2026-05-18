@@ -72,7 +72,7 @@ async fn main_inner() -> Result<(), Error> {
 
     #[cfg(feature = "rest")]
     let iceberg_catalog_list = {
-        if catalog_url.starts_with("s3://") {
+        if catalog_url.starts_with("s3://") || catalog_url.starts_with("file://") {
             tracing::info!("Using file catalog with URL: {}", catalog_url);
             Arc::new(
                 FileCatalogList::new(&catalog_url, object_store)
