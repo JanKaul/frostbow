@@ -5,7 +5,9 @@ use aws_credential_types::provider::ProvideCredentials;
 use clap::Parser;
 use datafusion::{
     execution::{
-        context::SessionContext, memory_pool::GreedyMemoryPool, runtime_env::RuntimeEnvBuilder,
+        context::SessionContext,
+        memory_pool::{GreedyMemoryPool, TrackConsumersPool},
+        runtime_env::RuntimeEnvBuilder,
         SessionStateBuilder,
     },
     logical_expr::ScalarUDF,
@@ -191,8 +193,10 @@ async fn main_inner() -> Result<(), Error> {
 
     let runtime_env_builder = RuntimeEnvBuilder::new();
     let runtime_env_builder = if let Some(limit) = args.memory {
-        runtime_env_builder
-            .with_memory_pool(Arc::new(GreedyMemoryPool::new(limit * BYTES_IN_GIBIBYTE)))
+        runtime_env_builder.with_memory_pool(Arc::new(TrackConsumersPool::new(
+            GreedyMemoryPool::new(limit * BYTES_IN_GIBIBYTE),
+            std::num::NonZeroUsize::new(5).unwrap(),
+        )))
     } else {
         runtime_env_builder
     };
