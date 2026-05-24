@@ -37,36 +37,47 @@ arrow-select  = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hl
 arrow-string  = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
 parquet       = { git = "https://github.com/Embucket/arrow-rs.git", branch = "hll-v58.2.0" }
 
-# DataFusion — Embucket join-reordering branch (datafusion 53.1.0).
-datafusion                            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-catalog                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-catalog-listing            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-cli                        = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-common                     = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-common-runtime             = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-datasource                 = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-datasource-arrow           = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-datasource-avro            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-datasource-csv             = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-datasource-json            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-datasource-parquet         = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-execution                  = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-expr                       = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-expr-common                = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-functions                  = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-functions-aggregate        = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-functions-aggregate-common = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-functions-nested           = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-functions-table            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-functions-window           = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-functions-window-common    = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-optimizer                  = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-physical-expr              = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-physical-expr-adapter      = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-physical-expr-common       = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-physical-optimizer         = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-physical-plan              = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-pruning                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-session                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
-datafusion-sql                        = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-reorder" }
+# DataFusion — Embucket/datafusion branch reclaimer-join-repartition (datafusion 53.1.0 + reclaimer + join-reordering + join-repartition).
+datafusion                            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-catalog                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-catalog-listing            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-cli                        = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-common                     = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-common-runtime             = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-datasource                 = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-datasource-arrow           = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-datasource-avro            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-datasource-csv             = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-datasource-json            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-datasource-parquet         = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-execution                  = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-expr                       = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-expr-common                = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-functions                  = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-functions-aggregate        = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-functions-aggregate-common = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-functions-nested           = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-functions-table            = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-functions-window           = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-functions-window-common    = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-optimizer                  = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-physical-expr              = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-physical-expr-adapter      = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-physical-expr-common       = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-physical-optimizer         = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-physical-plan              = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-pruning                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-session                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
+datafusion-sql                        = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
 
+# iceberg-rust — local checkout patched for PartitionedFile.table_reference field.
+[patch."https://github.com/Embucket/iceberg-rust.git"]
+iceberg-rust              = { path = "/home/work/workspace/github/iceberg-rust/iceberg-rust" }
+iceberg-rust-spec         = { path = "/home/work/workspace/github/iceberg-rust/iceberg-rust-spec" }
+datafusion_iceberg        = { path = "/home/work/workspace/github/iceberg-rust/datafusion_iceberg" }
+datafusion-iceberg-sql    = { path = "/home/work/workspace/github/iceberg-rust/datafusion-iceberg-sql" }
+iceberg-file-catalog      = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-file-catalog" }
+iceberg-glue-catalog      = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-glue-catalog" }
+iceberg-s3tables-catalog  = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-s3tables-catalog" }
+iceberg-sql-catalog       = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-sql-catalog" }
+iceberg-rest-catalog      = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-rest-catalog" }
