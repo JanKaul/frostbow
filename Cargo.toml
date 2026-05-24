@@ -70,14 +70,3 @@ datafusion-pruning                    = { git = "https://github.com/Embucket/dat
 datafusion-session                    = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
 datafusion-sql                        = { git = "https://github.com/Embucket/datafusion.git", branch = "reclaimer-join-repartition" }
 
-# iceberg-rust — local checkout patched for PartitionedFile.table_reference field.
-[patch."https://github.com/Embucket/iceberg-rust.git"]
-iceberg-rust              = { path = "/home/work/workspace/github/iceberg-rust/iceberg-rust" }
-iceberg-rust-spec         = { path = "/home/work/workspace/github/iceberg-rust/iceberg-rust-spec" }
-datafusion_iceberg        = { path = "/home/work/workspace/github/iceberg-rust/datafusion_iceberg" }
-datafusion-iceberg-sql    = { path = "/home/work/workspace/github/iceberg-rust/datafusion-iceberg-sql" }
-iceberg-file-catalog      = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-file-catalog" }
-iceberg-glue-catalog      = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-glue-catalog" }
-iceberg-s3tables-catalog  = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-s3tables-catalog" }
-iceberg-sql-catalog       = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-sql-catalog" }
-iceberg-rest-catalog      = { path = "/home/work/workspace/github/iceberg-rust/catalogs/iceberg-rest-catalog" }
